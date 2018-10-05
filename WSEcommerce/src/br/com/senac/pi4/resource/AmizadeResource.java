@@ -6,7 +6,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import br.com.senac.pi4.model.Amizade;
-import br.com.senac.pi4.model.Curtida;
 import br.com.senac.pi4.services.AmizadeServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +25,7 @@ public class AmizadeResource {
 	        
 	   })
 	   @ApiOperation(value = "Associa um usuario a outro usuario gerando o vinculo de amizade",
-	           response = Curtida.class)
+	           response = Amizade.class)
 	public void amizade(Amizade amizade) throws Exception {
 		amizadeServicImpl.amizade(amizade);
 	}
