@@ -42,7 +42,7 @@ public class CurtidaDAO {
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement(sql);
-
+			
 			psta.setLong(1, id);
 
 			psta.executeUpdate();
