@@ -1,30 +1,30 @@
 package br.com.senac.pi4.model;
 
+import java.sql.Blob;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(
-	       value = "Comentario",
-	       description = "Classe que modela um objeto do tipo comentario"
+   value = "Historia",
+   description = "Classe que modela um objeto do tipo historia"
 )
-public class Comentario {
+public class HistoriaDTO {
 	
 	private Long id;
-	private Usuario usuario;
-	private Historia historia;
+	private UsuarioDTO usuario;
 	private String texto;
-	private Date data;
-	
-	public Comentario() {
-		super();
-	}
-
-	public Comentario(Usuario usuario, Historia historia, String texto, Date data) {
+    private Blob foto;
+    private Date data;
+    
+    public HistoriaDTO() {
+    	super();
+    }
+    
+	public HistoriaDTO(UsuarioDTO usuario, String texto, Date data) {
 		this();
 		this.usuario = usuario;
-		this.historia = historia;
 		this.texto = texto;
 		this.data = data;
 	}
@@ -39,21 +39,12 @@ public class Comentario {
 	}
 	
 	@ApiModelProperty(value = "usuario", required = true)
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
-	}
-	
-	@ApiModelProperty(value = "historia", required = true)
-	public Historia getHistoria() {
-		return historia;
-	}
-
-	public void setHistoria(Historia historia) {
-		this.historia = historia;
 	}
 	
 	@ApiModelProperty(value = "texto", required = true)
@@ -65,6 +56,15 @@ public class Comentario {
 		this.texto = texto;
 	}
 	
+	@ApiModelProperty(value = "foto", required = false)
+	public Blob getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
+	
 	@ApiModelProperty(value = "data", required = true)
 	public Date getData() {
 		return data;
@@ -73,5 +73,5 @@ public class Comentario {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 }

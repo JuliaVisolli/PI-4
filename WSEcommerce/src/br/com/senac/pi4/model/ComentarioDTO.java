@@ -1,30 +1,30 @@
 package br.com.senac.pi4.model;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(
-   value = "Historia",
-   description = "Classe que modela um objeto do tipo historia"
+	       value = "Comentario",
+	       description = "Classe que modela um objeto do tipo comentario"
 )
-public class Historia {
+public class ComentarioDTO {
 	
 	private Long id;
-	private Usuario usuario;
+	private UsuarioDTO usuario;
+	private HistoriaDTO historia;
 	private String texto;
-    private Blob foto;
-    private Date data;
-    
-    public Historia() {
-    	super();
-    }
-    
-	public Historia(Usuario usuario, String texto, Date data) {
+	private Date data;
+	
+	public ComentarioDTO() {
+		super();
+	}
+
+	public ComentarioDTO(UsuarioDTO usuario, HistoriaDTO historia, String texto, Date data) {
 		this();
 		this.usuario = usuario;
+		this.historia = historia;
 		this.texto = texto;
 		this.data = data;
 	}
@@ -39,12 +39,21 @@ public class Historia {
 	}
 	
 	@ApiModelProperty(value = "usuario", required = true)
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
+	}
+	
+	@ApiModelProperty(value = "historia", required = true)
+	public HistoriaDTO getHistoria() {
+		return historia;
+	}
+
+	public void setHistoria(HistoriaDTO historia) {
+		this.historia = historia;
 	}
 	
 	@ApiModelProperty(value = "texto", required = true)
@@ -56,15 +65,6 @@ public class Historia {
 		this.texto = texto;
 	}
 	
-	@ApiModelProperty(value = "foto", required = false)
-	public Blob getFoto() {
-		return foto;
-	}
-
-	public void setFoto(Blob foto) {
-		this.foto = foto;
-	}
-	
 	@ApiModelProperty(value = "data", required = true)
 	public Date getData() {
 		return data;
@@ -73,5 +73,5 @@ public class Historia {
 	public void setData(Date data) {
 		this.data = data;
 	}
-
+	
 }

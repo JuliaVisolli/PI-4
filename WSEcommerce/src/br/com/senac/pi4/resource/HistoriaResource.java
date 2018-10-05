@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.senac.pi4.model.Historia;
+import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.services.HistoriaServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,12 +21,12 @@ public class HistoriaResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Historia.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = HistoriaDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Associa uma historia a um usuário",
-	           response = Historia.class)
-	public void historia(Historia historia) {
+	           response = HistoriaDTO.class)
+	public void historia(HistoriaDTO historia) {
 		historiaServiceImpl.historia(historia);
 	}
 

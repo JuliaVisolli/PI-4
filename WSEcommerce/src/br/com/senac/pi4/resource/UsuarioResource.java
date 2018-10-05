@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.senac.pi4.model.Usuario;
+import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,24 +26,24 @@ public class UsuarioResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Usuario.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Salva um usuario na base de dados",
-	           response = Usuario.class)
-	public void save(Usuario usuario) {
+	           response = UsuarioDTO.class)
+	public void save(UsuarioDTO usuario) {
 		usuarioServiceImpl.save(usuario);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Usuario.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Retorna todos os usuários",
-	           response = Usuario.class)
-	public List<Usuario> list() {
+	           response = UsuarioDTO.class)
+	public List<UsuarioDTO> list() {
 		return usuarioServiceImpl.listUsuario();
 	}
 	
@@ -73,7 +73,7 @@ public class UsuarioResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response usuario(@PathParam("param") String usuarioId) {
 
-		Usuario listPg = null;
+		UsuarioDTO listPg = null;
 
 		try {
 			listPg = usuarioServiceImpl.usuario(usuarioId);

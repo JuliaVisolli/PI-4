@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.senac.pi4.model.Amizade;
+import br.com.senac.pi4.model.AmizadeDTO;
 import br.com.senac.pi4.services.AmizadeServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,12 +21,12 @@ public class AmizadeResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Amizade.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Associa um usuario a outro usuario gerando o vinculo de amizade",
-	           response = Amizade.class)
-	public void amizade(Amizade amizade) throws Exception {
+	           response = AmizadeDTO.class)
+	public void amizade(AmizadeDTO amizade) throws Exception {
 		amizadeServicImpl.amizade(amizade);
 	}
 	

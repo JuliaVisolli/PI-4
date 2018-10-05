@@ -7,17 +7,17 @@ import io.swagger.annotations.ApiModelProperty;
    value = "Amizade",
    description = "Classe que modela um objeto do tipo amizade"
 )
-public class Amizade {
+public class AmizadeDTO {
 	
-	private Usuario usuario1;
-	private Usuario usuario2;
+	private UsuarioDTO usuario1;
+	private UsuarioDTO usuario2;
 	private boolean aprovada;
 	
-	public Amizade() {
+	public AmizadeDTO() {
 		super();
 	}
 	
-	public Amizade(Usuario usuario1, Usuario usuario2, boolean aprovada) {
+	public AmizadeDTO(UsuarioDTO usuario1, UsuarioDTO usuario2, boolean aprovada) {
 		this();
 		this.usuario1 = usuario1;
 		this.usuario2 = usuario2;
@@ -25,20 +25,20 @@ public class Amizade {
 	}
 	
 	@ApiModelProperty(value = "usuario que solicita a amizade", required = true)
-	public Usuario getUsuario1() {
+	public UsuarioDTO getUsuario1() {
 		return usuario1;
 	}
 
-	public void setUsuario1(Usuario usuario1) {
+	public void setUsuario1(UsuarioDTO usuario1) {
 		this.usuario1 = usuario1;
 	}
 	
 	@ApiModelProperty(value = "usuario que foi solicitado a amizade", required = true)
-	public Usuario getUsuario2() {
+	public UsuarioDTO getUsuario2() {
 		return usuario2;
 	}
 
-	public void setUsuario2(Usuario usuario2) {
+	public void setUsuario2(UsuarioDTO usuario2) {
 		this.usuario2 = usuario2;
 	}
 	

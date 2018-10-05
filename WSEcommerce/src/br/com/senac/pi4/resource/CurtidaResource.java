@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.senac.pi4.model.Curtida;
+import br.com.senac.pi4.model.CurtidaDTO;
 import br.com.senac.pi4.services.CurtidaServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,12 +22,12 @@ public class CurtidaResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Curtida.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = CurtidaDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Associa uma curtida de um usuario a uma historia",
-	           response = Curtida.class)
-	public void curtida(Curtida curtida) throws Exception {
+	           response = CurtidaDTO.class)
+	public void curtida(CurtidaDTO curtida) throws Exception {
 		curtidaServiceImpl.curtida(curtida);
 	}
 

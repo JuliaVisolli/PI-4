@@ -1,13 +1,13 @@
 package br.com.senac.pi4.services;
 
 import br.com.senac.pi4.dao.CurtidaDAO;
-import br.com.senac.pi4.model.Curtida;
+import br.com.senac.pi4.model.CurtidaDTO;
 
 public class CurtidaServiceImpl {
 
 	CurtidaDAO curtidaDAO = new CurtidaDAO();
 
-	public void curtida(Curtida curtida) {
+	public void curtida(CurtidaDTO curtida) {
 		try {
 
 			curtidaDAO.curtida(curtida);

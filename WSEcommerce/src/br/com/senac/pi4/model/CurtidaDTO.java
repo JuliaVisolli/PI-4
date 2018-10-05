@@ -7,36 +7,36 @@ import io.swagger.annotations.ApiModelProperty;
    value = "Curtida",
    description = "Classe que modela um objeto do tipo curtida"
 )
-public class Curtida {
+public class CurtidaDTO {
 	
-	private Usuario usuario;
-	private Historia historia;
+	private UsuarioDTO usuario;
+	private HistoriaDTO historia;
 	
-	public Curtida() {
+	public CurtidaDTO() {
 		super();
 	}
 
-	public Curtida(Usuario usuario, Historia historia) {
+	public CurtidaDTO(UsuarioDTO usuario, HistoriaDTO historia) {
 		this();
 		this.usuario = usuario;
 		this.historia = historia;
 	}
 	
 	@ApiModelProperty(value = "usuario", required = true)
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 	
 	@ApiModelProperty(value = "historia", required = true)
-	public Historia getHistoria() {
+	public HistoriaDTO getHistoria() {
 		return historia;
 	}
 
-	public void setHistoria(Historia historia) {
+	public void setHistoria(HistoriaDTO historia) {
 		this.historia = historia;
 	}
 	

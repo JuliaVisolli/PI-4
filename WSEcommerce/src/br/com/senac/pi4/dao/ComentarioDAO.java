@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 import javax.ws.rs.core.Response;
 
-import br.com.senac.pi4.model.Comentario;
+import br.com.senac.pi4.model.ComentarioDTO;
 import br.com.senac.pi4.services.Database;
 
 public class ComentarioDAO {
 	
-	public Response comentario(Comentario comentario) throws Exception {
+	public Response comentario(ComentarioDTO comentario) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;

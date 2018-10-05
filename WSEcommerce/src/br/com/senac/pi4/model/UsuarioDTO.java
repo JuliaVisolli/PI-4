@@ -19,18 +19,18 @@ import io.swagger.annotations.ApiModelProperty;
    value = "Usuario",
    description = "Classe que modela um objeto do tipo usuario"
 )
-public class Usuario {
+public class UsuarioDTO {
     private Long id;
     private String nome;
     private String email;
     private String senha;
     private Blob foto;
     
-    public Usuario() {
+    public UsuarioDTO() {
     	super();
     }
     
-	public Usuario(String nome, String email, String senha) {
+	public UsuarioDTO(String nome, String email, String senha) {
 		this();
 		this.nome = nome;
 		this.email = email;

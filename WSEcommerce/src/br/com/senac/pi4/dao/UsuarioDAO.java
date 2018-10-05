@@ -14,17 +14,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import br.com.senac.pi4.model.Usuario;
+import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.Database;
 
 public class UsuarioDAO {
 
-	public Usuario selectUsuario(String produtoId) throws Exception {
+	public UsuarioDTO selectUsuario(String produtoId) throws Exception {
 		// exemplo de select
 		Connection conn = null;
 		PreparedStatement psta = null;
 
-		Usuario pg = null;
+		UsuarioDTO pg = null;
 		Integer pID = null;
 		pID = Integer.parseInt(produtoId);
 		try {
@@ -36,7 +36,7 @@ public class UsuarioDAO {
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {
-				pg = new Usuario();
+				pg = new UsuarioDTO();
 				pg.setNome(rs.getString("nome"));
 				pg.setSenha(rs.getString("senha"));
 				pg.setId(rs.getLong("id"));
@@ -62,7 +62,7 @@ public class UsuarioDAO {
 		Connection conn = null;
 		PreparedStatement psta = null;
 
-		Usuario pg = null;
+		UsuarioDTO pg = null;
 		Integer pID = null;
 		pID = Integer.parseInt(usuarioId);
 		byte[] fileBytes = null;
@@ -91,11 +91,11 @@ public class UsuarioDAO {
 		return fileBytes;
 	}
 
-	public List<Usuario> selectAllUsuario() throws Exception {
+	public List<UsuarioDTO> selectAllUsuario() throws Exception {
 		// exemplo de select
 		Connection conn = null;
 		PreparedStatement psta = null;
-		List<Usuario> listPg = new ArrayList<Usuario>();
+		List<UsuarioDTO> listPg = new ArrayList<UsuarioDTO>();
 
 		try {
 			conn = Database.get().conn();
@@ -104,7 +104,7 @@ public class UsuarioDAO {
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {
-				Usuario pg = new Usuario();
+				UsuarioDTO pg = new UsuarioDTO();
 				pg.setNome(rs.getString("nome"));
 				pg.setSenha(rs.getString("senha"));
 				pg.setId(rs.getLong("id"));
@@ -148,7 +148,7 @@ public class UsuarioDAO {
 
 	}
 
-	public Response save(Usuario usuario) throws Exception {
+	public Response save(UsuarioDTO usuario) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;

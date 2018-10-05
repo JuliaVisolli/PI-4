@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.senac.pi4.model.Curtida;
+import br.com.senac.pi4.model.CurtidaDTO;
 import br.com.senac.pi4.services.Database;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,13 +21,13 @@ public class CurtidaDAO {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = Curtida.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = CurtidaDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Associa uma curtida de um usuario a uma historia",
-	           response = Curtida.class)
+	           response = CurtidaDTO.class)
 	@Path("/curtida")
-	public Response curtida(Curtida curtida) throws Exception {
+	public Response curtida(CurtidaDTO curtida) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;

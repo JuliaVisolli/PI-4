@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 import javax.ws.rs.core.Response;
 
-import br.com.senac.pi4.model.Historia;
+import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.services.Database;
 
 public class HistoriaDAO {
 	
 	
-	public Response historia(Historia historia) throws Exception {
+	public Response historia(HistoriaDTO historia) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;
