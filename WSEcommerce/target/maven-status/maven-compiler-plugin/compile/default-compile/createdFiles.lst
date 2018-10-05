@@ -1,0 +1,4 @@
+br/com/senac/pi4/services/Produto.class
+Main.class
+br/com/senac/pi4/services/Database.class
+br/com/senac/pi4/services/ProdutoServices.class
