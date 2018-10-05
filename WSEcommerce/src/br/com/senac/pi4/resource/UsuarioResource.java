@@ -31,8 +31,20 @@ public class UsuarioResource {
 	   })
 	   @ApiOperation(value = "Salva um usuario na base de dados",
 	           response = UsuarioDTO.class)
-	public void save(UsuarioDTO usuario) {
-		usuarioServiceImpl.save(usuario);
+	public Response save(UsuarioDTO usuario) {
+		try {
+			usuarioServiceImpl.save(usuario);
+			
+		} catch (Exception e) {
+			return Response.status(500).entity(null).build();
+		}
+		if (usuario == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(usuario).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 	
 	@GET
@@ -44,7 +56,13 @@ public class UsuarioResource {
 	   @ApiOperation(value = "Retorna todos os usuários",
 	           response = UsuarioDTO.class)
 	public List<UsuarioDTO> list() {
-		return usuarioServiceImpl.listUsuario();
+		try {
+			return usuarioServiceImpl.listUsuario();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 //	@GET
@@ -88,6 +106,25 @@ public class UsuarioResource {
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 
+	}
+	
+	@POST
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response login(UsuarioDTO usuarioDTO) {
+
+		try {
+			usuarioDTO = usuarioServiceImpl.login(usuarioDTO);
+		} catch (Exception e) {
+			return Response.status(500).entity(null).build();
+		}
+		if (usuarioDTO == null)
+			return Response.status(200).entity("Usuário não encontrado").build();
+
+		return Response.status(200).entity(usuarioDTO).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 
 }

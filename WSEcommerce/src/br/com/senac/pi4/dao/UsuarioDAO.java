@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -148,16 +149,32 @@ public class UsuarioDAO {
 
 	}
 
-	public Response save(UsuarioDTO usuario) throws Exception {
+	public UsuarioDTO save(UsuarioDTO usuario) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;
 		try {
+			
+			String email = null;
+			final Iterator<UsuarioDTO> usuarioIterator = selectAllUsuario().iterator();
+			
+			while(usuarioIterator.hasNext()) {
+				UsuarioDTO usuarioDTOs = usuarioIterator.next();
+				email = usuarioDTOs.getEmail();
+				if(usuario.getEmail().equalsIgnoreCase(email)) {
+					System.out.println("E-mail já existe. Cadastre outro e-mail");
+					return null;
+				}else if (usuario.getEmail().isEmpty() || usuario.getSenha().isEmpty()) {
+					System.out.println("E-mail e senha são obrigatórios.");
+					return null;
+				}
+			}
+			
 			conn = Database.get().conn();
 			psta = conn.prepareStatement("INSERT INTO Usuario"
 					+  "(nome, senha, email) VALUES"
 					+  "(?,?,?)");
-							
+			
 			psta.setString(1, usuario.getNome());
 			psta.setString(2, usuario.getSenha());
 			psta.setString(3, usuario.getEmail());
@@ -174,7 +191,27 @@ public class UsuarioDAO {
 			if (conn != null)
 				conn.close();
 		}
-		return Response.ok().build();
+		return usuario;
+	}
+	
+	public UsuarioDTO login(UsuarioDTO usuarioDTO) throws Exception {
+		
+		String email = null;
+		String senha = null;
+		final Iterator<UsuarioDTO> usuarioIterator = selectAllUsuario().iterator();
+		
+		while(usuarioIterator.hasNext()) {
+			UsuarioDTO usuarioDTOs = usuarioIterator.next();
+			email = usuarioDTOs.getEmail();
+			senha = usuarioDTOs.getSenha();
+			
+			if(usuarioDTO.getEmail().equalsIgnoreCase(email) && usuarioDTO.getSenha().equalsIgnoreCase(senha)) {
+				return usuarioDTOs;
+			}
+			
+		}	
+		return null;
+		
 	}
 
 }
