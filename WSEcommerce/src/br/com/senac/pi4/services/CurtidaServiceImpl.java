@@ -7,14 +7,9 @@ public class CurtidaServiceImpl {
 
 	CurtidaDAO curtidaDAO = new CurtidaDAO();
 
-	public void curtida(CurtidaDTO curtida) {
-		try {
+	public void curtida(CurtidaDTO curtida) throws Exception {
 
-			curtidaDAO.curtida(curtida);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		curtidaDAO.curtida(curtida);
 
 	}
 
