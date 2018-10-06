@@ -29,7 +29,7 @@ public class ComentarioDTO {
 		this.data = data;
 	}
 	
-	@ApiModelProperty(value = "id", required = true)
+	@ApiModelProperty(value = "id do comentario", required = true)
 	public Long getId() {
 		return id;
 	}
@@ -47,7 +47,7 @@ public class ComentarioDTO {
 		this.usuario = usuario;
 	}
 	
-	@ApiModelProperty(value = "historia", required = true)
+	@ApiModelProperty(value = "historia associada ao comentario", required = true)
 	public HistoriaDTO getHistoria() {
 		return historia;
 	}
@@ -56,7 +56,7 @@ public class ComentarioDTO {
 		this.historia = historia;
 	}
 	
-	@ApiModelProperty(value = "texto", required = true)
+	@ApiModelProperty(value = "comentario da historia", required = true)
 	public String getTexto() {
 		return texto;
 	}
@@ -65,7 +65,7 @@ public class ComentarioDTO {
 		this.texto = texto;
 	}
 	
-	@ApiModelProperty(value = "data", required = true)
+	@ApiModelProperty(value = "data do comentario", required = true)
 	public Date getData() {
 		return data;
 	}

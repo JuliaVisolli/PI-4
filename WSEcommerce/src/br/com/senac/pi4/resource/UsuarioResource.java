@@ -1,5 +1,6 @@
 package br.com.senac.pi4.resource;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -31,15 +32,14 @@ public class UsuarioResource {
 	   })
 	   @ApiOperation(value = "Salva um usuario na base de dados",
 	           response = UsuarioDTO.class)
-	public Response save(UsuarioDTO usuario) {
+	public Response saveUsuario(UsuarioDTO usuario) {
 		try {
-			usuarioServiceImpl.save(usuario);
-			
+			usuario = usuarioServiceImpl.saveUsuario(usuario);
 		} catch (Exception e) {
 			return Response.status(500).entity(null).build();
 		}
 		if (usuario == null)
-			return Response.status(404).entity(null).build();
+			return Response.status(404).entity("Usuario nao encontrado").build();
 
 		return Response.status(200).entity(usuario).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
@@ -53,11 +53,11 @@ public class UsuarioResource {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
 	        
 	   })
-	   @ApiOperation(value = "Retorna todos os usuários",
+	   @ApiOperation(value = "Retorna todos os usuarios disponiveis na base de dados",
 	           response = UsuarioDTO.class)
-	public List<UsuarioDTO> list() {
+	public List<UsuarioDTO> selectAllUsuario() {
 		try {
-			return usuarioServiceImpl.listUsuario();
+			return usuarioServiceImpl.selectAllUsuario();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,36 +65,21 @@ public class UsuarioResource {
 		return null;
 	}
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response getUsuario() {
-//
-//		List<Usuario> listPg = null;
-//
-//		try {
-//			listPg = usuarioServiceImpl.listUsuario();
-//		} catch (Exception e) {
-//			return Response.status(500).entity(null).build();
-//		}
-//		if (listPg == null)
-//			return Response.status(404).entity(null).build();
-//
-//		return Response.status(200).entity(listPg).header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-//				.header("Access-Control-Allow-Credentials", "true")
-//				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
-//
-//	}
-	
 	@GET
 	@Path("/{param}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response usuario(@PathParam("param") String usuarioId) {
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna um usuario da base de dados de acordo com o parametro id passado",
+	           response = UsuarioDTO.class)
+	public Response selectUsuario(@PathParam("param") String usuarioId) {
 
 		UsuarioDTO listPg = null;
 
 		try {
-			listPg = usuarioServiceImpl.usuario(usuarioId);
+			listPg = usuarioServiceImpl.selectUsuario(usuarioId);
 		} catch (Exception e) {
 			return Response.status(500).entity(null).build();
 		}
@@ -111,6 +96,12 @@ public class UsuarioResource {
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Faz o login do usurio na aplicacao",
+	           response = UsuarioDTO.class)
 	public Response login(UsuarioDTO usuarioDTO) {
 
 		try {
@@ -125,6 +116,33 @@ public class UsuarioResource {
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+	}
+	
+	@GET
+	@Path("/image/{param}")
+	@Produces("image/jpg")
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna uma imagem relacionada a um usuario",
+	           response = UsuarioDTO.class)
+	public Response selectImage(@PathParam("param") String usuarioId) {
+
+		byte[] image = null;
+
+		try {
+			image = usuarioServiceImpl.selectImage(usuarioId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return Response.ok(new ByteArrayInputStream(image)).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
 	}
 
 }

@@ -42,7 +42,7 @@ public class AmizadeDTO {
 		this.usuario2 = usuario2;
 	}
 	
-	@ApiModelProperty(value = "aprovada", required = true)
+	@ApiModelProperty(value = "status da solicitaco de amizade", required = true)
 	public boolean isAprovada() {
 		return aprovada;
 	}

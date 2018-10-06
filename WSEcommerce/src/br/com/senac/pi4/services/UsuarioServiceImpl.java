@@ -9,20 +9,24 @@ public class UsuarioServiceImpl {
 
 	UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-	public void save(UsuarioDTO usuario) throws Exception {
-		usuarioDAO.save(usuario);
+	public UsuarioDTO saveUsuario(UsuarioDTO usuario) throws Exception {
+		return usuarioDAO.saveUsuario(usuario);
 	}
 
-	public List<UsuarioDTO> listUsuario() throws Exception {
-		return usuarioDAO.selectAllUsuario();
-	}
-
-	public UsuarioDTO usuario(String usuarioId) throws Exception {
+	public UsuarioDTO selectUsuario(String usuarioId) throws Exception {
 		return usuarioDAO.selectUsuario(usuarioId);
+	}
+
+	public List<UsuarioDTO> selectAllUsuario() throws Exception {
+		return usuarioDAO.selectAllUsuario();
 	}
 
 	public UsuarioDTO login(UsuarioDTO usuarioDTO) throws Exception {
 		return usuarioDAO.login(usuarioDTO);
+	}
+	
+	public byte[] selectImage(String usuarioId) throws Exception {
+		return usuarioDAO.selectImage(usuarioId);
 	}
 
 }

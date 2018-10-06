@@ -29,7 +29,7 @@ public class HistoriaDTO {
 		this.data = data;
 	}
 	
-	@ApiModelProperty(value = "id", required = true)
+	@ApiModelProperty(value = "id da historia", required = true)
 	public Long getId() {
 		return id;
 	}
@@ -38,7 +38,7 @@ public class HistoriaDTO {
 		this.id = id;
 	}
 	
-	@ApiModelProperty(value = "usuario", required = true)
+	@ApiModelProperty(value = "id do usuario associado a historia", required = true)
 	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
@@ -56,7 +56,7 @@ public class HistoriaDTO {
 		this.texto = texto;
 	}
 	
-	@ApiModelProperty(value = "foto", required = false)
+	@ApiModelProperty(value = "foto da historia", required = false)
 	public Blob getFoto() {
 		return foto;
 	}
@@ -65,7 +65,7 @@ public class HistoriaDTO {
 		this.foto = foto;
 	}
 	
-	@ApiModelProperty(value = "data", required = true)
+	@ApiModelProperty(value = "data de postagem da historia", required = true)
 	public Date getData() {
 		return data;
 	}

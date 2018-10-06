@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.ws.rs.core.Response;
-
 import br.com.senac.pi4.model.AmizadeDTO;
 import br.com.senac.pi4.services.Database;
 
 
 public class AmizadeDAO {
 	
-	public Response amizade(AmizadeDTO amizade) throws Exception {
+	public AmizadeDTO amizade(AmizadeDTO amizade) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;
@@ -38,7 +36,7 @@ public class AmizadeDAO {
 			if (conn != null)
 				conn.close();
 		}
-		return Response.ok().build();
+		return null;
 	}
 	
 

@@ -5,8 +5,6 @@
  */
 package br.com.senac.pi4.model;
 
-import java.sql.Blob;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,7 +22,7 @@ public class UsuarioDTO {
     private String nome;
     private String email;
     private String senha;
-    private Blob foto;
+    private byte[] foto;
     
     public UsuarioDTO() {
     	super();
@@ -37,7 +35,7 @@ public class UsuarioDTO {
 		this.senha = senha;
 	}
 	
-	@ApiModelProperty(value = "id", required = true)
+	@ApiModelProperty(value = "id do usuario", required = true)
 	public Long getId() {
 		return id;
 	}
@@ -45,32 +43,32 @@ public class UsuarioDTO {
 		this.id = id;
 	}
 	
-	@ApiModelProperty(value = "nome", required = true)
+	@ApiModelProperty(value = "nome do usuario", required = true)
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	@ApiModelProperty(value = "email", required = true)
+	@ApiModelProperty(value = "email do usuario", required = true)
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@ApiModelProperty(value = "senha", required = true)
+	@ApiModelProperty(value = "senha do usuario", required = true)
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	@ApiModelProperty(value = "foto", required = false)
-	public Blob getFoto() {
+	@ApiModelProperty(value = "foto do usuario", required = false)
+	public byte[] getFoto() {
 		return foto;
 	}
-	public void setFoto(Blob foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}  
     

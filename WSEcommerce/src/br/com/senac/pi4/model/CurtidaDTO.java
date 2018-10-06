@@ -22,7 +22,7 @@ public class CurtidaDTO {
 		this.historia = historia;
 	}
 	
-	@ApiModelProperty(value = "usuario", required = true)
+	@ApiModelProperty(value = "id do usuario associado a uma curtida", required = true)
 	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
@@ -31,7 +31,7 @@ public class CurtidaDTO {
 		this.usuario = usuario;
 	}
 	
-	@ApiModelProperty(value = "historia", required = true)
+	@ApiModelProperty(value = "id da historia associada a uma curtida", required = true)
 	public HistoriaDTO getHistoria() {
 		return historia;
 	}
