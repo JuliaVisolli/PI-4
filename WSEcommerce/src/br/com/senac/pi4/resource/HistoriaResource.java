@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -63,5 +64,23 @@ public class HistoriaResource {
 		}
 		return null;
 	}
-
+	
+	@GET
+	@Path("/usuario/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = HistoriaDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna todas historias de um usuario especifico",
+	           response = UsuarioDTO.class)
+	public List<HistoriaDTO> selectAllHistoriasByIdUsuario(@PathParam("param") String idUsuario) {
+		try {
+			return historiaServiceImpl.selectAllHistoriasByIdUsuario(idUsuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

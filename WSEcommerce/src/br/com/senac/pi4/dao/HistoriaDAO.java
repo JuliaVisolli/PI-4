@@ -78,5 +78,46 @@ public class HistoriaDAO {
 		return listPg;
 	}
 
+	public List<HistoriaDTO> selectAllHistoriasByIdUsuario(String idUsuario) throws Exception {
+		// exemplo de select
+				Connection conn = null;
+				PreparedStatement psta = null;
+				Integer pID = null;
+				pID = Integer.parseInt(idUsuario);
+				List<HistoriaDTO> listPg = new ArrayList<HistoriaDTO>();
 
+				try {
+					conn = Database.get().conn();
+					psta = conn.prepareStatement("select  h.id as id_historia, h.data as data_postagem, " + 
+							" h.texto as texto_postagem, h.foto as foto_postagem, count(distinct c.usuario) as total_comentarios, count( distinct cur.usuario) as total_curtidas" + 
+							" from Historia h left JOIN comentario c " + 
+							" on h.id = c.historico left join Curtida cur on h.id = cur.historico where h.usuario = ? GROUP BY c.historico, cur.historico, h.id, h.data, h.texto, h.foto ORDER BY h.data DESC;");
+					
+					psta.setInt(1, pID);
+					
+					ResultSet rs = psta.executeQuery();
+					
+					while (rs.next()) {
+						HistoriaDTO pg = new HistoriaDTO();
+						pg.setId(rs.getLong("id_historia"));
+						pg.setData(rs.getDate("data_postagem"));
+						pg.setTexto(rs.getString("texto_postagem"));
+						pg.setFoto(rs.getBytes("foto_postagem"));
+						pg.setTotalComentarios(rs.getInt("total_comentarios"));
+						pg.setTotalCurtidas(rs.getInt("total_curtidas"));
+						
+						listPg.add(pg);
+					}
+				} catch (SQLException e) {
+					throw e;
+				} catch (Exception e) {
+					throw e;
+				} finally {
+					if (psta != null)
+						psta.close();
+					if (conn != null)
+						conn.close();
+				}
+				return listPg;
+	}
 }

@@ -16,6 +16,10 @@ public class HistoriaServiceImpl {
 	public List<HistoriaDTO> selectAllHistoria() throws Exception {
 		return historiaDAO.selectAllHistoria();
 	}
+	
+	public List<HistoriaDTO> selectAllHistoriasByIdUsuario(String idUsuario) throws Exception {
+		return historiaDAO.selectAllHistoriasByIdUsuario(idUsuario);
+	}
 
 
 }
