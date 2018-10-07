@@ -7,10 +7,12 @@ public class CurtidaServiceImpl {
 
 	CurtidaDAO curtidaDAO = new CurtidaDAO();
 
-	public void curtida(CurtidaDTO curtida) throws Exception {
-
-		curtidaDAO.curtida(curtida);
-
+	public CurtidaDTO saveCurtida(CurtidaDTO curtida) throws Exception {
+		return curtidaDAO.saveCurtida(curtida);
+	}
+	
+	public Integer getCountAllCurtidasByIDHistoria(String idHistoria) throws Exception {
+		return curtidaDAO.getCountAllCurtidasByIDHistoria(idHistoria);
 	}
 
 }

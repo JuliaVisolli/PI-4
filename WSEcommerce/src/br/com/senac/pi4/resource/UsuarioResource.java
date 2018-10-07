@@ -110,7 +110,7 @@ public class UsuarioResource {
 			return Response.status(500).entity(null).build();
 		}
 		if (usuarioDTO == null)
-			return Response.status(200).entity("Usuário não encontrado").build();
+			return Response.status(200).entity("Usuario nao encontrado").build();
 
 		return Response.status(200).entity(usuarioDTO).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")

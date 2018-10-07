@@ -8,14 +8,15 @@ public class ComentarioServiceImpl {
 	
 	ComentarioDAO comentarioDAO = new ComentarioDAO();
 	
-	public void comentario(ComentarioDTO comentario) {
-		try {
-			comentarioDAO.comentario(comentario);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public ComentarioDTO saveComentario(ComentarioDTO comentario) throws Exception {
+		return comentarioDAO.saveComentario(comentario);
 	}
-
+	
+	public ComentarioDTO getAllComentariosOfHistoria(String idHistoria) throws Exception {
+		return comentarioDAO.getAllComentariosOfHistoria(idHistoria);
+	}
+	
+	public Integer getCountAllComentariosByIDHistoria(String idHistoria) throws Exception {
+		return comentarioDAO.getCountAllComentariosByIDHistoria(idHistoria);
+	}
 }

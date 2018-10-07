@@ -59,20 +59,19 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public UsuarioDTO selectUsuario(String produtoId) throws Exception {
+	public UsuarioDTO selectUsuario(String usuarioId) throws Exception {
 		// exemplo de select
 		Connection conn = null;
 		PreparedStatement psta = null;
 
 		UsuarioDTO pg = null;
 		Integer pID = null;
-		pID = Integer.parseInt(produtoId);
+		pID = Integer.parseInt(usuarioId);
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement("select * from Usuario where id = ?");
 			psta.setInt(1, pID);
 
-			//
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {

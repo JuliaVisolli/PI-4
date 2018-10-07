@@ -15,7 +15,7 @@ public class HistoriaDTO {
 	private Long id;
 	private UsuarioDTO usuario;
 	private String texto;
-    private Blob foto;
+    private byte[] foto;
     private Date data;
     
     public HistoriaDTO() {
@@ -57,11 +57,11 @@ public class HistoriaDTO {
 	}
 	
 	@ApiModelProperty(value = "foto da historia", required = false)
-	public Blob getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 	
