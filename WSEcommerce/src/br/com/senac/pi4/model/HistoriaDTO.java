@@ -13,6 +13,8 @@ public class HistoriaDTO {
 	private String texto;
 	private byte[] foto;
 	private Date data;
+	private Integer totalComentarios;
+	private Integer totalCurtidas;
 
 	public HistoriaDTO() {
 		super();
@@ -73,6 +75,23 @@ public class HistoriaDTO {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	@ApiModelProperty(value = "total de comentarios da historia", required = false)
+	public Integer getTotalComentarios() {
+		return totalComentarios;
+	}
+
+	public void setTotalComentarios(Integer totalComentarios) {
+		this.totalComentarios = totalComentarios;
+	}
+	@ApiModelProperty(value = "total de curtidas da historia", required = false)
+	public Integer getTotalCurtidas() {
+		return totalCurtidas;
+	}
+	
+	public void setTotalCurtidas(Integer totalCurtidas) {
+		this.totalCurtidas = totalCurtidas;
 	}
 
 }
