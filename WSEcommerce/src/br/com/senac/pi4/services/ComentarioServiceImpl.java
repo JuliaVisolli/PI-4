@@ -1,5 +1,7 @@
 package br.com.senac.pi4.services;
 
+import java.util.List;
+
 import br.com.senac.pi4.dao.ComentarioDAO;
 import br.com.senac.pi4.model.ComentarioDTO;
 
@@ -12,7 +14,7 @@ public class ComentarioServiceImpl {
 		return comentarioDAO.saveComentario(comentario);
 	}
 	
-	public ComentarioDTO getAllComentariosOfHistoria(String idHistoria) throws Exception {
+	public List<ComentarioDTO> getAllComentariosOfHistoria(String idHistoria) throws Exception {
 		return comentarioDAO.getAllComentariosOfHistoria(idHistoria);
 	}
 	

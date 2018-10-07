@@ -35,6 +35,11 @@ public class UsuarioDTO {
 		this.senha = senha;
 	}
 	
+	public UsuarioDTO(Long id) {
+		super();
+		this.id = id;
+	}
+
 	@ApiModelProperty(value = "id do usuario", required = true)
 	public Long getId() {
 		return id;

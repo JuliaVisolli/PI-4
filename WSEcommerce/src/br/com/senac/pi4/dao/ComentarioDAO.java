@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.senac.pi4.model.ComentarioDTO;
+import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.Database;
 
@@ -39,27 +42,30 @@ public class ComentarioDAO {
 		return comentario;
 	}
 
-	public ComentarioDTO getAllComentariosOfHistoria(String idHistoria) throws Exception {
+	public List<ComentarioDTO> getAllComentariosOfHistoria(String idHistoria) throws Exception {
 		Connection conn = null;
 		PreparedStatement psta = null;
 		
-		ComentarioDTO pg = null;
+		List<ComentarioDTO> listPg = new ArrayList<ComentarioDTO>();
 		Integer pID = null;
 		pID = Integer.parseInt(idHistoria);
 		try {
 			conn = Database.get().conn();
-			psta = conn.prepareStatement("select distinct c.historico, c.texto, c.data from Comentario c INNER JOIN Historia h on" + 
-					"c.historico = h.id where c.historico = ? order by c.data ASC");
+			psta = conn.prepareStatement("select distinct c.id, c.usuario, c.historico, c.texto, c.data from Comentario c INNER JOIN Historia h on c.historico = h.id where c.historico = ? order by c.data ASC");
 			
 			psta.setInt(1, pID);
 
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {
-				pg = new ComentarioDTO();
+				ComentarioDTO pg = new ComentarioDTO();
+				pg.setId(rs.getLong("id"));
+				pg.setUsuario(new UsuarioDTO(rs.getLong("usuario")));
+				pg.setHistoria(new HistoriaDTO(rs.getLong("historico")));
 				pg.setTexto(rs.getString("texto"));
 				pg.setData(rs.getDate("data"));
-
+				
+				listPg.add(pg);
 			}
 
 		} catch (SQLException e) {
@@ -73,7 +79,7 @@ public class ComentarioDAO {
 				conn.close();
 		}
 		
-		return pg;
+		return listPg;
 	}
 	
 	public Integer getCountAllComentariosByIDHistoria(String idHistoria) throws Exception {

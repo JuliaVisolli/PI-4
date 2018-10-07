@@ -1,5 +1,7 @@
 package br.com.senac.pi4.resource;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -9,7 +11,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.senac.pi4.model.ComentarioDTO;
-import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.ComentarioServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ public class ComentarioResource {
 	}
 	
 	@GET
-	@Path("/{param}")
+	@Path("/historia/{param}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
@@ -55,9 +56,9 @@ public class ComentarioResource {
 	   })
 	   @ApiOperation(value = "seleciona todos os comentarios de um historico de um usuario especifico",
 	           response = ComentarioDTO.class)
-	public Response selectUsuario(@PathParam("param") String idHistoria) {
+	public Response selectAllComentarioOfHistoria(@PathParam("param") String idHistoria) {
 
-		ComentarioDTO listPg = null;
+		List<ComentarioDTO> listPg = null;
 
 		try {
 			listPg = comentarioServiceImpl.getAllComentariosOfHistoria(idHistoria);
