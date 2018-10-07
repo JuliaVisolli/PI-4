@@ -54,7 +54,7 @@ public class HistoriaResource {
 	   })
 	   @ApiOperation(value = "Retorna todas historias disponiveis na base de dados",
 	           response = UsuarioDTO.class)
-	public List<HistoriaDTO> selectAllUsuario() {
+	public List<HistoriaDTO> selectAllHistorias() {
 		try {
 			return historiaServiceImpl.selectAllHistoria();
 		} catch (Exception e) {

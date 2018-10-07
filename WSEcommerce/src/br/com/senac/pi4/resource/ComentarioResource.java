@@ -2,6 +2,7 @@ package br.com.senac.pi4.resource;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -56,12 +57,12 @@ public class ComentarioResource {
 	   })
 	   @ApiOperation(value = "seleciona todos os comentarios de um historico de um usuario especifico",
 	           response = ComentarioDTO.class)
-	public Response selectAllComentarioOfHistoria(@PathParam("param") String idHistoria) {
+	public Response getAllComentariosByIdHistoria(@PathParam("param") String idHistoria) {
 
 		List<ComentarioDTO> listPg = null;
 
 		try {
-			listPg = comentarioServiceImpl.getAllComentariosOfHistoria(idHistoria);
+			listPg = comentarioServiceImpl.getAllComentariosByIdHistoria(idHistoria);
 		} catch (Exception e) {
 			return Response.status(500).entity(null).build();
 		}
@@ -103,6 +104,32 @@ public class ComentarioResource {
 
 	}
 	
-	
+	@DELETE
+	@Path("/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "remove um comentario de um historico de um usuario especifico",
+	           response = ComentarioDTO.class)
+	public Response deleteComentario(@PathParam("param") String idHistoria) {
+
+		boolean listPg = false;
+
+		try {
+			listPg = comentarioServiceImpl.deleteComentrio(idHistoria);
+		} catch (Exception e) {
+			return Response.status(500).entity(null).build();
+		}
+		if (listPg == false)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(listPg).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
+	}
 
 }

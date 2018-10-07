@@ -14,11 +14,15 @@ public class ComentarioServiceImpl {
 		return comentarioDAO.saveComentario(comentario);
 	}
 	
-	public List<ComentarioDTO> getAllComentariosOfHistoria(String idHistoria) throws Exception {
-		return comentarioDAO.getAllComentariosOfHistoria(idHistoria);
+	public List<ComentarioDTO> getAllComentariosByIdHistoria(String idHistoria) throws Exception {
+		return comentarioDAO.getAllComentariosByIdHistoria(idHistoria);
 	}
 	
 	public Integer getCountAllComentariosByIDHistoria(String idHistoria) throws Exception {
 		return comentarioDAO.getCountAllComentariosByIDHistoria(idHistoria);
+	}
+	
+	public boolean deleteComentrio(String idHistoria) throws Exception {
+		return comentarioDAO.deleteComentario(idHistoria);
 	}
 }

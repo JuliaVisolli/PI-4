@@ -42,17 +42,18 @@ public class ComentarioDAO {
 		return comentario;
 	}
 
-	public List<ComentarioDTO> getAllComentariosOfHistoria(String idHistoria) throws Exception {
+	public List<ComentarioDTO> getAllComentariosByIdHistoria(String idHistoria) throws Exception {
 		Connection conn = null;
 		PreparedStatement psta = null;
-		
+
 		List<ComentarioDTO> listPg = new ArrayList<ComentarioDTO>();
 		Integer pID = null;
 		pID = Integer.parseInt(idHistoria);
 		try {
 			conn = Database.get().conn();
-			psta = conn.prepareStatement("select distinct c.id, c.usuario, c.historico, c.texto, c.data from Comentario c INNER JOIN Historia h on c.historico = h.id where c.historico = ? order by c.data ASC");
-			
+			psta = conn.prepareStatement(
+					"select distinct c.id, c.usuario, c.historico, c.texto, c.data from Comentario c INNER JOIN Historia h on c.historico = h.id where c.historico = ? order by c.data ASC");
+
 			psta.setInt(1, pID);
 
 			ResultSet rs = psta.executeQuery();
@@ -64,7 +65,7 @@ public class ComentarioDAO {
 				pg.setHistoria(new HistoriaDTO(rs.getLong("historico")));
 				pg.setTexto(rs.getString("texto"));
 				pg.setData(rs.getDate("data"));
-				
+
 				listPg.add(pg);
 			}
 
@@ -78,27 +79,27 @@ public class ComentarioDAO {
 			if (conn != null)
 				conn.close();
 		}
-		
+
 		return listPg;
 	}
-	
+
 	public Integer getCountAllComentariosByIDHistoria(String idHistoria) throws Exception {
 		Connection conn = null;
 		PreparedStatement psta = null;
-		
+
 		Integer pID = null;
 		Integer total = 0;
 		pID = Integer.parseInt(idHistoria);
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement("select COUNT(*) as total from Comentario where historico = ?");
-			
+
 			psta.setInt(1, pID);
 
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {
-				
+
 				total = rs.getInt("total");
 
 			}
@@ -113,8 +114,36 @@ public class ComentarioDAO {
 			if (conn != null)
 				conn.close();
 		}
-		
+
 		return total;
 	}
 
+	public boolean deleteComentario(String idComentario) throws Exception {
+
+		Connection conn = null;
+		PreparedStatement psta = null;
+		List<ComentarioDTO> listPg = new ArrayList<ComentarioDTO>();
+		Integer pID = null;
+		pID = Integer.parseInt(idComentario);
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement(
+					"DELETE c.historico FROM Comentario c INNER JOIN Historia h ON c.historico = h.id inner join usuario u on c.usuario = u.id WHERE c.id = ?");
+			
+			psta.setInt(1, pID);
+			
+			psta.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+		return true;
+	}
 }
