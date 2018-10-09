@@ -10,7 +10,7 @@ import br.com.senac.pi4.services.Database;
 
 public class AmizadeDAO {
 	
-	public AmizadeDTO amizade(AmizadeDTO amizade) throws Exception {
+	public AmizadeDTO solicitaAmizade(AmizadeDTO amizade) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;

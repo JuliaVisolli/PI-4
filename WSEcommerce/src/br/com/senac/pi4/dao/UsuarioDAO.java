@@ -183,5 +183,9 @@ public class UsuarioDAO {
 		}
 		return fileBytes;
 	}
-
+	
+	public UsuarioDTO buscaAmigo() {
+		
+		return null;
+	}
 }

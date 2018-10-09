@@ -7,14 +7,8 @@ public class AmizadeServiceImpl {
 
 	AmizadeDAO amizadeDAO = new AmizadeDAO();
 
-	public void amizade(AmizadeDTO amizade) {
-		try {
-			amizadeDAO.amizade(amizade);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public AmizadeDTO solicitaAmizade(AmizadeDTO amizade) throws Exception {
+		return amizadeDAO.solicitaAmizade(amizade);
 	}
 
 }
