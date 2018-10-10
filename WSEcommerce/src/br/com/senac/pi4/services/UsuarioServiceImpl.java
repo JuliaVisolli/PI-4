@@ -28,5 +28,9 @@ public class UsuarioServiceImpl {
 	public byte[] selectImage(String usuarioId) throws Exception {
 		return usuarioDAO.selectImage(usuarioId);
 	}
+	
+	public List<UsuarioDTO> buscaAmigo(String usuarioId) throws Exception {
+		return usuarioDAO.buscaAmigo(usuarioId);
+	}
 
 }

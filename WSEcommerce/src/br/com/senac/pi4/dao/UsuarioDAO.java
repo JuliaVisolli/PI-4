@@ -34,7 +34,7 @@ public class UsuarioDAO {
 					return null;
 				}
 			}
-			
+
 			psta = conn.prepareStatement("INSERT INTO Usuario" + "(nome, senha, email,foto) VALUES" + "(?,?,?,?)");
 
 			psta.setString(1, usuario.getNome());
@@ -182,8 +182,53 @@ public class UsuarioDAO {
 		return fileBytes;
 	}
 
-	public UsuarioDTO buscaAmigo() {
+	public List<UsuarioDTO> buscaAmigo(String idUsuario) throws Exception {
 
-		return null;
+		Connection conn = null;
+		PreparedStatement psta = null;
+		
+		List<UsuarioDTO> listUsers = new ArrayList<UsuarioDTO>();
+		UsuarioDTO pg = null;
+		Integer pID = null;
+		pID = Integer.parseInt(idUsuario);
+		try {
+			conn = Database.get().conn();
+			
+			psta = conn.prepareStatement("select  u.id, u.nome, u.email, u.foto " + 
+					"from Usuario u " + 
+					"where " + 
+					"	u.id = (SELECT usuario1 " + 
+					"		FROM Amizade a " + 
+					"		WHERE a.usuario2 = ?)" + 
+					"	OR " + 
+					"	u.id = (SELECT usuario2" + 
+					"		FROM Amizade a" + 
+					"		WHERE a.usuario1 = ?)");
+			
+			psta.setInt(1, pID);
+			psta.setInt(2, pID);
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+				pg = new UsuarioDTO();
+				pg.setNome(rs.getString("nome"));
+				pg.setId(rs.getLong("id"));
+				pg.setEmail(rs.getString("email"));
+				pg.setFoto(rs.getBytes("foto"));
+					
+				listUsers.add(pg);
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+		return listUsers;
+
 	}
 }

@@ -129,6 +129,7 @@ public class UsuarioResource {
 	           response = UsuarioDTO.class)
 	public Response selectImage(@PathParam("param") String usuarioId) {
 
+
 		byte[] image = null;
 
 		try {
@@ -145,4 +146,22 @@ public class UsuarioResource {
 
 	}
 
+	@GET
+	@Path("/amigo/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna todos os amigos disponiveis na base de dados",
+	           response = UsuarioDTO.class)
+	public List<UsuarioDTO> buscaAmigo(@PathParam("param") String idUsuario) {
+		try {
+			return usuarioServiceImpl.buscaAmigo(idUsuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
