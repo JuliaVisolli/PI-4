@@ -12,40 +12,38 @@ import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.Database;
 
 public class UsuarioDAO {
-	
+
 	public UsuarioDTO saveUsuario(UsuarioDTO usuario) throws Exception {
 
 		Connection conn = null;
 		PreparedStatement psta = null;
 		try {
-			
-			String email = null;
-			final Iterator<UsuarioDTO> usuarioIterator = selectAllUsuario().iterator();
-			
-			while(usuarioIterator.hasNext()) {
-				UsuarioDTO usuarioDTOs = usuarioIterator.next();
-				email = usuarioDTOs.getEmail();
-				if(usuario.getEmail().equalsIgnoreCase(email)) {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement("select COUNT(*) as total from Usuario u where u.email = ?");
+			psta.setString(1, usuario.getEmail());
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+				Integer totalEmail = rs.getInt("total");
+				if (totalEmail > 0) {
 					System.out.println("E-mail já existe. Cadastre outro e-mail");
 					return null;
-				}else if (usuario.getEmail().isEmpty() || usuario.getSenha().isEmpty()) {
+				} else if (usuario.getEmail().isEmpty() || usuario.getSenha().isEmpty()) {
 					System.out.println("E-mail e senha são obrigatórios.");
 					return null;
 				}
 			}
 			
-			conn = Database.get().conn();
-			psta = conn.prepareStatement("INSERT INTO Usuario"
-					+  "(nome, senha, email,foto) VALUES"
-					+  "(?,?,?,?)");
-			
+			psta = conn.prepareStatement("INSERT INTO Usuario" + "(nome, senha, email,foto) VALUES" + "(?,?,?,?)");
+
 			psta.setString(1, usuario.getNome());
 			psta.setString(2, usuario.getSenha());
 			psta.setString(3, usuario.getEmail());
 			psta.setBytes(4, usuario.getFoto());
 
 			psta.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw e;
 		} catch (Exception e) {
@@ -130,27 +128,27 @@ public class UsuarioDAO {
 		}
 		return listPg;
 	}
-	
+
 	public UsuarioDTO login(UsuarioDTO usuarioDTO) throws Exception {
-		
+
 		String email = null;
 		String senha = null;
 		final Iterator<UsuarioDTO> usuarioIterator = selectAllUsuario().iterator();
-		
-		while(usuarioIterator.hasNext()) {
+
+		while (usuarioIterator.hasNext()) {
 			UsuarioDTO usuarioDTOs = usuarioIterator.next();
 			email = usuarioDTOs.getEmail();
 			senha = usuarioDTOs.getSenha();
-			
-			if(usuarioDTO.getEmail().equalsIgnoreCase(email) && usuarioDTO.getSenha().equalsIgnoreCase(senha)) {
+
+			if (usuarioDTO.getEmail().equalsIgnoreCase(email) && usuarioDTO.getSenha().equalsIgnoreCase(senha)) {
 				return usuarioDTOs;
 			}
-			
-		}	
+
+		}
 		return null;
-		
+
 	}
-	
+
 	public byte[] selectImage(String usuarioId) throws Exception {
 		// exemplo de select
 		Connection conn = null;
@@ -183,9 +181,9 @@ public class UsuarioDAO {
 		}
 		return fileBytes;
 	}
-	
+
 	public UsuarioDTO buscaAmigo() {
-		
+
 		return null;
 	}
 }
