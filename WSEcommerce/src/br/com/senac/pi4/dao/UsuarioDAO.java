@@ -168,7 +168,7 @@ public class UsuarioDAO {
 			ResultSet rs = psta.executeQuery();
 
 			while (rs.next()) {
-				fileBytes = rs.getBytes("imagem");
+				fileBytes = rs.getBytes("foto");
 
 			}
 		} catch (SQLException e) {
