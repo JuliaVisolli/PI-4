@@ -28,11 +28,11 @@ public class UsuarioDTO {
     	super();
     }
     
-	public UsuarioDTO(String nome, String email, String senha) {
+	public UsuarioDTO(Long id, String nome, byte[] foto) {
 		this();
+		this.id = id;
 		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
+		this.foto = foto;
 	}
 	
 	public UsuarioDTO(Long id) {
