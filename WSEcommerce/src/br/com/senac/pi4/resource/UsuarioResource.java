@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
@@ -158,6 +159,25 @@ public class UsuarioResource {
 	public List<UsuarioDTO> buscaAmigo(@PathParam("param") String idUsuario) {
 		try {
 			return usuarioServiceImpl.buscaAmigo(idUsuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("/perfil/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = HistoriaDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna todas historias de um usuario especifico",
+	           response = UsuarioDTO.class)
+	public List<HistoriaDTO> perfilUsuario(@PathParam("param") String idUsuario) {
+		try {
+			return usuarioServiceImpl.perfilUsuario(idUsuario);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

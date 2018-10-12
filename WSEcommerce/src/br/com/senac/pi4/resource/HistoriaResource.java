@@ -31,7 +31,7 @@ public class HistoriaResource {
 
 	})
 	@ApiOperation(value = "Associa uma historia a um usuario", response = HistoriaDTO.class)
-	public Response saveHistoria(HistoriaDTO historia)  {
+	public Response saveHistoria(HistoriaDTO historia) {
 		try {
 			historia = historiaServiceImpl.saveHistoria(historia);
 		} catch (Exception e) {
@@ -39,22 +39,21 @@ public class HistoriaResource {
 		}
 		if (historia == null)
 			return Response.status(404).entity("Historia nao foi inserida").build();
-		
+
 		return Response.status(200).entity(historia).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = HistoriaDTO.class)
-	        
-	   })
-	   @ApiOperation(value = "Retorna todas historias disponiveis na base de dados",
-	           response = UsuarioDTO.class)
+			@ApiResponse(code = 200, message = "Service executed without errors", response = HistoriaDTO.class)
+
+	})
+	@ApiOperation(value = "Retorna todas historias disponiveis na base de dados", response = UsuarioDTO.class)
 	public List<HistoriaDTO> selectAllHistorias() {
 		try {
 			return historiaServiceImpl.selectAllHistoria();
@@ -64,23 +63,5 @@ public class HistoriaResource {
 		}
 		return null;
 	}
-	
-	@GET
-	@Path("/usuario/{param}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = HistoriaDTO.class)
-	        
-	   })
-	   @ApiOperation(value = "Retorna todas historias de um usuario especifico",
-	           response = UsuarioDTO.class)
-	public List<HistoriaDTO> selectAllHistoriasByIdUsuario(@PathParam("param") String idUsuario) {
-		try {
-			return historiaServiceImpl.selectAllHistoriasByIdUsuario(idUsuario);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 }

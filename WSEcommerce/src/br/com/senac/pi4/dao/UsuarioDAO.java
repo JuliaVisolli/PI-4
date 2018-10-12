@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.Database;
 
@@ -230,5 +231,49 @@ public class UsuarioDAO {
 		}
 		return listUsers;
 
+	}
+	
+	public List<HistoriaDTO> perfilUsuario(String idUsuario) throws Exception {
+		// exemplo de select
+				Connection conn = null;
+				PreparedStatement psta = null;
+				Integer pID = null;
+				pID = Integer.parseInt(idUsuario);
+				List<HistoriaDTO> listPg = new ArrayList<HistoriaDTO>();
+
+				try {
+					conn = Database.get().conn();
+					psta = conn.prepareStatement("select  h.id as id_historia, h.data as data_postagem, " + 
+							" h.texto as texto_postagem, h.foto as foto_postagem, count(distinct c.usuario) as total_comentarios, count( distinct cur.usuario) as total_curtidas, u.id as id_usuario, u.nome as nome_usuario, u.foto as foto_usuario" + 
+							" from Historia h left JOIN comentario c " + 
+							" on h.id = c.historico left join Curtida cur on h.id = cur.historico left join Usuario u on h.usuario = u.id where h.usuario = ? GROUP BY u.id, u.nome, u.foto, c.historico, cur.historico, h.id, h.data, h.texto, h.foto ORDER BY h.data DESC;");
+					
+					psta.setInt(1, pID);
+					
+					ResultSet rs = psta.executeQuery();
+					
+					while (rs.next()) {
+						HistoriaDTO pg = new HistoriaDTO();
+						pg.setId(rs.getLong("id_historia"));
+						pg.setUsuario(new UsuarioDTO(rs.getLong("id_usuario"), rs.getString("nome_usuario"), rs.getBytes("foto_usuario")));
+						pg.setData(rs.getDate("data_postagem"));
+						pg.setTexto(rs.getString("texto_postagem"));
+						pg.setFoto(rs.getBytes("foto_postagem"));
+						pg.setTotalComentarios(rs.getInt("total_comentarios"));
+						pg.setTotalCurtidas(rs.getInt("total_curtidas"));
+						
+						listPg.add(pg);
+					}
+				} catch (SQLException e) {
+					throw e;
+				} catch (Exception e) {
+					throw e;
+				} finally {
+					if (psta != null)
+						psta.close();
+					if (conn != null)
+						conn.close();
+				}
+				return listPg;
 	}
 }
