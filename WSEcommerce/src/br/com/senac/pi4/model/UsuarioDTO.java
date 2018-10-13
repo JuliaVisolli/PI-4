@@ -77,7 +77,8 @@ public class UsuarioDTO {
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-
+	
+	@ApiModelProperty(value = "historia do usuario", required = false)
 	public HistoriaDTO getHistoria() {
 		return historia;
 	}

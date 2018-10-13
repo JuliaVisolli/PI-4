@@ -172,7 +172,7 @@ public class UsuarioResource {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
 	        
 	   })
-	   @ApiOperation(value = "Retorna todas historias de um usuario especifico",
+	   @ApiOperation(value = "Retorna todas as informacoes pertinentes ao perfil de um usuario especifico, como nome, historias, foto, texto, etc",
 	           response = UsuarioDTO.class)
 	public List<UsuarioDTO> perfilUsuario(@PathParam("param") String idUsuario) {
 		try {

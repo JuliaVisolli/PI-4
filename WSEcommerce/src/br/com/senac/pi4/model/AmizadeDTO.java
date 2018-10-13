@@ -11,7 +11,7 @@ public class AmizadeDTO {
 	
 	private UsuarioDTO usuario1;
 	private UsuarioDTO usuario2;
-	private boolean aprovada;
+	private boolean aprovada = false;
 	
 	public AmizadeDTO() {
 		super();
