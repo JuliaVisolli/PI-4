@@ -3,7 +3,6 @@ package br.com.senac.pi4.services;
 import java.util.List;
 
 import br.com.senac.pi4.dao.UsuarioDAO;
-import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.model.UsuarioDTO;
 
 public class UsuarioServiceImpl {
@@ -34,7 +33,7 @@ public class UsuarioServiceImpl {
 		return usuarioDAO.buscaAmigo(usuarioId);
 	}
 	
-	public List<HistoriaDTO> perfilUsuario(String idUsuario) throws Exception {
+	public List<UsuarioDTO> perfilUsuario(String idUsuario) throws Exception {
 		return usuarioDAO.perfilUsuario(idUsuario);
 	}
 

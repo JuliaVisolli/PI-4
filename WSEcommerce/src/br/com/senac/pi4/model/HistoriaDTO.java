@@ -25,11 +25,13 @@ public class HistoriaDTO {
 		this.id = id;
 	}
 
-	public HistoriaDTO(Long id, String texto, Date data) {
+	public HistoriaDTO(Long id, String texto, Date data, int totalComentarios, int totalCurtidas) {
 		this();
 		this.id = id;
 		this.texto = texto;
 		this.data = data;
+		this.totalComentarios = totalComentarios;
+		this.totalCurtidas = totalCurtidas;
 	}
 
 	@ApiModelProperty(value = "id da historia", required = true)

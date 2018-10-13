@@ -23,6 +23,7 @@ public class UsuarioDTO {
     private String email;
     private String senha;
     private byte[] foto;
+    private HistoriaDTO historia;
     
     public UsuarioDTO() {
     	super();
@@ -75,6 +76,16 @@ public class UsuarioDTO {
 	}
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public HistoriaDTO getHistoria() {
+		return historia;
+	}
+
+	public void setHistoria(HistoriaDTO historia) {
+		this.historia = historia;
 	}  
+	
+	
     
 }
