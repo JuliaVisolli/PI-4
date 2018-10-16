@@ -10,5 +10,8 @@ public class AmizadeServiceImpl {
 	public AmizadeDTO solicitaAmizade(AmizadeDTO amizade) throws Exception {
 		return amizadeDAO.solicitaAmizade(amizade);
 	}
-
+	
+	public void deleteAmizade(Long idUsuario1, Long idUsuario2, Boolean aprovada) throws Exception {
+		amizadeDAO.deleteAmizade(idUsuario1, idUsuario2, aprovada);
+	}
 }

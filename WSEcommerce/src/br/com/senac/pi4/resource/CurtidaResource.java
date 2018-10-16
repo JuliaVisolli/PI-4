@@ -79,11 +79,11 @@ public class CurtidaResource {
 	@Path("/{idUsuario}/{idHistoria}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = CurtidaDTO.class)
 	        
 	   })
 	   @ApiOperation(value = "Remove uma curtida",
-	           response = ComentarioDTO.class)
+	           response = CurtidaDTO.class)
 	public Response deleteCurtida(@PathParam("idUsuario") Long idUsuario, @PathParam("idHistoria") Long idHistoria) {
 
 		try {

@@ -1,12 +1,15 @@
 package br.com.senac.pi4.resource;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.senac.pi4.model.AmizadeDTO;
+import br.com.senac.pi4.model.ComentarioDTO;
 import br.com.senac.pi4.services.AmizadeServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,4 +44,26 @@ public class AmizadeResource {
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 
+	@DELETE
+	@Path("/{idUsuario1}/{idUsuario2}/{aprovada}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Remove uma amizade",
+	           response = AmizadeDTO.class)
+	public Response deleteCurtida(@PathParam("idUsuario2") Long idUsuario1, @PathParam("idUsuario2") Long idUsuario2, @PathParam("aprovada") Boolean aprovada) {
+
+		try {
+			amizadeServicImpl.deleteAmizade(idUsuario1,idUsuario2, aprovada);
+		} catch (Exception e) {
+			return Response.status(500).entity(null).build();
+		}
+		if (idUsuario2 == null || aprovada == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).build();
+
+	}
 }
