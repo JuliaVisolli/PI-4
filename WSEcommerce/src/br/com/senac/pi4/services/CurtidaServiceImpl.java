@@ -11,6 +11,10 @@ public class CurtidaServiceImpl {
 		return curtidaDAO.saveCurtida(curtida);
 	}
 	
+	public void deleteCurtida(Long idUsuario, Long idHistoria) throws Exception {
+		 curtidaDAO.deleteCurtida(idUsuario, idHistoria);
+	}
+	
 	public Integer getCountAllCurtidasByIDHistoria(String idHistoria) throws Exception {
 		return curtidaDAO.getCountAllCurtidasByIDHistoria(idHistoria);
 	}

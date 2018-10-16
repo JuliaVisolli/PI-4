@@ -1,5 +1,6 @@
 package br.com.senac.pi4.resource;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -53,7 +54,7 @@ public class CurtidaResource {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
 	        
 	   })
-	   @ApiOperation(value = "seleciona todos as curtidas de um historico de um usuario especifico",
+	   @ApiOperation(value = "seleciona todos o total de curtidas de um historico de um usuario especifico",
 	           response = ComentarioDTO.class)
 	public Response getCountAllComentariosByIDHistoria(@PathParam("param") String idHistoria) {
 
@@ -71,6 +72,29 @@ public class CurtidaResource {
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
+	}
+	
+	@DELETE
+	@Path("/{idUsuario}/{idHistoria}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Remove uma curtida",
+	           response = ComentarioDTO.class)
+	public Response deleteCurtida(@PathParam("idUsuario") Long idUsuario, @PathParam("idHistoria") Long idHistoria) {
+
+		try {
+			curtidaServiceImpl.deleteCurtida(idUsuario, idHistoria);
+		} catch (Exception e) {
+			return Response.status(500).entity(null).build();
+		}
+		if (idUsuario == null || idHistoria == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).build();
 
 	}
 

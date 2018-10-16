@@ -36,15 +36,16 @@ public class CurtidaDAO {
 		return curtida;
 	}
 
-	public void delete(Long id) throws Exception {
-		String sql = "DELETE FROM Curtida WHERE usuario = ?";
+	public void deleteCurtida(Long idUsuario, Long idHistoria) throws Exception {
+		String sql = "DELETE FROM Curtida WHERE usuario = ? and historico = ?";
 		Connection conn = null;
 		PreparedStatement psta = null;
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement(sql);
 			
-			psta.setLong(1, id);
+			psta.setLong(1, idUsuario);
+			psta.setLong(2, idHistoria);
 
 			psta.executeUpdate();
 
