@@ -105,7 +105,7 @@ public class ComentarioResource {
 	}
 	
 	@DELETE
-	@Path("/{param}")
+	@Path("/{idUsuario}/{idHistoria}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = ComentarioDTO.class)
@@ -113,22 +113,18 @@ public class ComentarioResource {
 	   })
 	   @ApiOperation(value = "remove um comentario de um historico de um usuario especifico",
 	           response = ComentarioDTO.class)
-	public Response deleteComentario(@PathParam("param") String idHistoria) {
+	public Response deleteComentario(@PathParam("idUsuario") Long idUsuario, Long idHistoria) {
 
-		boolean listPg = false;
 
 		try {
-			listPg = comentarioServiceImpl.deleteComentrio(idHistoria);
+			 comentarioServiceImpl.deleteComentrio(idUsuario, idHistoria);
 		} catch (Exception e) {
 			return Response.status(500).entity(null).build();
 		}
-		if (listPg == false)
+		if (idUsuario == null || idHistoria == null)
 			return Response.status(404).entity(null).build();
 
-		return Response.status(200).entity(listPg).header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Credentials", "true")
-				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+		return Response.status(200).build();
 
 	}
 

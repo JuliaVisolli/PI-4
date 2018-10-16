@@ -118,22 +118,19 @@ public class ComentarioDAO {
 		return total;
 	}
 
-	public boolean deleteComentario(String idComentario) throws Exception {
-
+	public void deleteComentario(Long idUsuario, Long idHistoria) throws Exception {
+		String sql = "DELETE FROM Comentario WHERE usuario = ? and historico = ?";
 		Connection conn = null;
 		PreparedStatement psta = null;
-		List<ComentarioDTO> listPg = new ArrayList<ComentarioDTO>();
-		Integer pID = null;
-		pID = Integer.parseInt(idComentario);
 		try {
 			conn = Database.get().conn();
-			psta = conn.prepareStatement(
-					"DELETE c.historico FROM Comentario c INNER JOIN Historia h ON c.historico = h.id inner join usuario u on c.usuario = u.id WHERE c.id = ?");
+			psta = conn.prepareStatement(sql);
 			
-			psta.setInt(1, pID);
-			
+			psta.setLong(1, idUsuario);
+			psta.setLong(2, idHistoria);
+
 			psta.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw e;
 		} catch (Exception e) {
@@ -144,6 +141,6 @@ public class ComentarioDAO {
 			if (conn != null)
 				conn.close();
 		}
-		return true;
 	}
+		
 }
