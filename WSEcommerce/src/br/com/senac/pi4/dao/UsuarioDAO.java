@@ -196,8 +196,8 @@ public class UsuarioDAO {
 			conn = Database.get().conn();
 
 			psta = conn.prepareStatement("select  u.id, u.nome, u.email, u.foto " + "from Usuario u " + "where "
-					+ "	u.id = (SELECT usuario1 " + "		FROM Amizade a " + "		WHERE a.usuario2 = ? and a.aprovada = 1)" + "	OR "
-					+ "	u.id = (SELECT usuario2" + "		FROM Amizade a" + "		WHERE a.usuario1 = ? and a.aprovada = 1)");
+					+ "	u.id in (SELECT usuario1 " + "		FROM Amizade a " + "		WHERE a.usuario2 = ? and a.aprovada = 1)" + "	OR "
+					+ "	u.id in (SELECT usuario2" + "		FROM Amizade a" + "		WHERE a.usuario1 = ? and a.aprovada = 1)");
 
 			psta.setInt(1, pID);
 			psta.setInt(2, pID);
