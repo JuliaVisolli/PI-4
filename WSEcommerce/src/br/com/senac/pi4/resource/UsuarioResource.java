@@ -1,6 +1,7 @@
 package br.com.senac.pi4.resource;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -36,7 +37,7 @@ public class UsuarioResource {
 		try {
 			usuario = usuarioServiceImpl.saveUsuario(usuario);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (usuario == null)
 			return Response.status(404).entity("Usuario nao encontrado").build();
@@ -55,14 +56,20 @@ public class UsuarioResource {
 	   })
 	   @ApiOperation(value = "Retorna todos os usuarios disponiveis na base de dados",
 	           response = UsuarioDTO.class)
-	public List<UsuarioDTO> selectAllUsuario() {
+	public Response selectAllUsuario() {
+		List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
 		try {
-			return usuarioServiceImpl.selectAllUsuario();
+			usuarioDTOs = usuarioServiceImpl.selectAllUsuario();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
-		return null;
+		if (usuarioDTOs == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(usuarioDTOs).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 	
 	@GET
@@ -81,7 +88,7 @@ public class UsuarioResource {
 		try {
 			listPg = usuarioServiceImpl.selectUsuario(usuarioId);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (listPg == null)
 			return Response.status(404).entity(null).build();
@@ -107,7 +114,7 @@ public class UsuarioResource {
 		try {
 			usuarioDTO = usuarioServiceImpl.login(usuarioDTO);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (usuarioDTO == null)
 			return Response.status(200).entity("Usuario nao encontrado").build();
@@ -133,13 +140,24 @@ public class UsuarioResource {
 		byte[] image = null;
 
 		try {
+
 			image = usuarioServiceImpl.selectImage(usuarioId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		return Response.ok(new ByteArrayInputStream(image)).header("Access-Control-Allow-Origin", "*")
+			return Response.status(500).entity(e.getMessage()).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+					.header("Access-Control-Allow-Credentials", "true")
+					.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
+		}
+		if(image == null){
+			return Response.status(400).entity("Imagem nula").header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+					.header("Access-Control-Allow-Credentials", "true")
+					.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+		}
+		return Response.status(200).entity(new ByteArrayInputStream(image)).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
@@ -155,14 +173,20 @@ public class UsuarioResource {
 	   })
 	   @ApiOperation(value = "Retorna todos os amigos disponiveis na base de dados",
 	           response = UsuarioDTO.class)
-	public List<UsuarioDTO> buscaAmigo(@PathParam("param") String idUsuario) {
+	public Response buscaAmigo(@PathParam("param") String idUsuario) {
+		List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
 		try {
-			return usuarioServiceImpl.buscaAmigo(idUsuario);
+			usuarioDTOs = usuarioServiceImpl.buscaAmigo(idUsuario);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
-		return null;
+		if (usuarioDTOs == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(usuarioDTOs).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 	
 	@GET
@@ -174,13 +198,29 @@ public class UsuarioResource {
 	   })
 	   @ApiOperation(value = "Retorna todas as informacoes pertinentes ao perfil de um usuario especifico, como nome, historias, foto, texto, etc",
 	           response = UsuarioDTO.class)
-	public List<UsuarioDTO> perfilUsuario(@PathParam("param") String idUsuario) {
+	public Response perfilUsuario(@PathParam("param") String idUsuario) {
+		
+		List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
 		try {
-			return usuarioServiceImpl.perfilUsuario(idUsuario);
+			usuarioDTOs = usuarioServiceImpl.perfilUsuario(idUsuario);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
-		return null;
+		if (usuarioDTOs == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(usuarioDTOs).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
+	
+	@GET
+	@Path("/ola")
+	@Produces(MediaType.APPLICATION_JSON)
+	
+	public String ola() {
+		return "Ola";
+	}
+	
 }

@@ -1,11 +1,11 @@
 package br.com.senac.pi4.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,7 +35,7 @@ public class HistoriaResource {
 		try {
 			historia = historiaServiceImpl.saveHistoria(historia);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (historia == null)
 			return Response.status(404).entity("Historia nao foi inserida").build();
@@ -54,14 +54,20 @@ public class HistoriaResource {
 
 	})
 	@ApiOperation(value = "Retorna todas historias disponiveis na base de dados", response = UsuarioDTO.class)
-	public List<HistoriaDTO> selectAllHistorias() {
+	public Response selectAllHistorias() {
+		List<HistoriaDTO> historiaDTOs = new ArrayList<>();
 		try {
-			return historiaServiceImpl.selectAllHistoria();
+			historiaDTOs = historiaServiceImpl.selectAllHistoria();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
-		return null;
+		if (historiaDTOs == null)
+			return Response.status(404).entity("Historia nao foi inserida").build();
+
+		return Response.status(200).entity(historiaDTOs).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 
 }

@@ -37,7 +37,7 @@ public class ComentarioResource {
 		try {
 			comentario = comentarioServiceImpl.saveComentario(comentario);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (comentario == null)
 			return Response.status(404).entity("Comentario nao foi inserido").build();
@@ -64,7 +64,7 @@ public class ComentarioResource {
 		try {
 			listPg = comentarioServiceImpl.getAllComentariosByIdHistoria(idHistoria);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (listPg == null)
 			return Response.status(404).entity(null).build();
@@ -92,7 +92,7 @@ public class ComentarioResource {
 		try {
 			totalComentarios = comentarioServiceImpl.getCountAllComentariosByIDHistoria(idHistoria);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (totalComentarios == null)
 			return Response.status(404).entity(null).build();
@@ -119,7 +119,7 @@ public class ComentarioResource {
 		try {
 			 comentarioServiceImpl.deleteComentrio(idUsuario, idHistoria);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (idUsuario == null || idHistoria == null)
 			return Response.status(404).entity(null).build();

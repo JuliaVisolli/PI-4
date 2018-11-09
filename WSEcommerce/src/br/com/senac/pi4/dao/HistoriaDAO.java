@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.senac.pi4.model.HistoriaDTO;
-import br.com.senac.pi4.model.UsuarioDTO;
 import br.com.senac.pi4.services.Database;
 
 public class HistoriaDAO {

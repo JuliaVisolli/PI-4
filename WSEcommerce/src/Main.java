@@ -3,7 +3,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import br.com.senac.pi4.model.ComentarioDTO;
-import br.com.senac.pi4.model.HistoriaDTO;
 import br.com.senac.pi4.services.Database;
 
 
@@ -29,7 +28,7 @@ public class Main {
 				
 				while (rs.next()) {
 					pg = new ComentarioDTO();
-					pg.setHistoria(new HistoriaDTO(rs.getLong("historico"), rs.getString("texto"), rs.getDate("data")));
+//					pg.setHistoria(new HistoriaDTO(rs.getLong("historico"), rs.getString("texto"), rs.getDate("data")));
 					pg.setTexto(rs.getString("texto"));
 					pg.setData(rs.getDate("data"));
 					System.out.println(pg.getHistoria().getId());

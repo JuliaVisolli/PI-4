@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.senac.pi4.model.AmizadeDTO;
-import br.com.senac.pi4.model.ComentarioDTO;
 import br.com.senac.pi4.services.AmizadeServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +32,7 @@ public class AmizadeResource {
 		try {
 			amizadeServicImpl.solicitaAmizade(amizade);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (amizade == null)
 			return Response.status(404).entity("Comentario nao foi inserido").build();
@@ -58,7 +57,7 @@ public class AmizadeResource {
 		try {
 			amizadeServicImpl.deleteAmizade(idUsuario1,idUsuario2, aprovada);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (idUsuario2 == null || aprovada == null)
 			return Response.status(404).entity(null).build();

@@ -36,7 +36,7 @@ public class CurtidaResource {
 		} catch (
 
 		Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (curtida == null)
 			return Response.status(404).entity("Curtida nao foi inserido").build();
@@ -63,7 +63,7 @@ public class CurtidaResource {
 		try {
 			totalCurtidas = curtidaServiceImpl.getCountAllCurtidasByIDHistoria(idHistoria);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (totalCurtidas == null)
 			return Response.status(404).entity(null).build();
@@ -89,7 +89,7 @@ public class CurtidaResource {
 		try {
 			curtidaServiceImpl.deleteCurtida(idUsuario, idHistoria);
 		} catch (Exception e) {
-			return Response.status(500).entity(null).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 		if (idUsuario == null || idHistoria == null)
 			return Response.status(404).entity(null).build();

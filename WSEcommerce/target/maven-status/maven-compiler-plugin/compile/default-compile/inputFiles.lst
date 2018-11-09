@@ -1,4 +1,22 @@
-/Users/francinisilva/Downloads/WSEcommerce 2/src/br/com/senac/pi4/services/Database.java
-/Users/francinisilva/Downloads/WSEcommerce 2/src/br/com/senac/pi4/services/ProdutoServices.java
-/Users/francinisilva/Downloads/WSEcommerce 2/src/Main.java
-/Users/francinisilva/Downloads/WSEcommerce 2/src/br/com/senac/pi4/services/Produto.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/dao/ComentarioDAO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/resource/ComentarioResource.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/dao/UsuarioDAO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/dao/CurtidaDAO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/ComentarioServiceImpl.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/model/AmizadeDTO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/model/ComentarioDTO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/resource/AmizadeResource.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/UsuarioServiceImpl.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/resource/CurtidaResource.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/dao/AmizadeDAO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/resource/HistoriaResource.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/dao/HistoriaDAO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/Main.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/model/HistoriaDTO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/HistoriaServiceImpl.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/resource/UsuarioResource.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/CurtidaServiceImpl.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/model/UsuarioDTO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/model/CurtidaDTO.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/Database.java
+/Users/francinisilva/Desktop/PI-4/WSEcommerce/src/br/com/senac/pi4/services/AmizadeServiceImpl.java
