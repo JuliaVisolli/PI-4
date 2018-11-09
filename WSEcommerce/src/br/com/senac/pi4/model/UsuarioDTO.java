@@ -29,9 +29,8 @@ public class UsuarioDTO {
     	super();
     }
     
-	public UsuarioDTO(Long id, String nome, byte[] foto) {
+	public UsuarioDTO(String nome, byte[] foto) {
 		this();
-		this.id = id;
 		this.nome = nome;
 		this.foto = foto;
 	}
