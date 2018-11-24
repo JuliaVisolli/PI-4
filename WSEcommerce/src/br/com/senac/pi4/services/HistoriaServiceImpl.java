@@ -13,8 +13,8 @@ public class HistoriaServiceImpl {
 		return historiaDAO.saveHistoria(historia);
 	}
 	
-	public List<HistoriaDTO> selectAllHistoria() throws Exception {
-		return historiaDAO.selectAllHistoria();
+	public List<HistoriaDTO> selectAllHistoria(String usuarioId) throws Exception {
+		return historiaDAO.selectAllHistoria(usuarioId);
 	}
 	
 	
