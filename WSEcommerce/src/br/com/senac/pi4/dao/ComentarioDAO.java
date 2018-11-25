@@ -21,11 +21,10 @@ public class ComentarioDAO {
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement(
-					"INSERT INTO Comentario" + "(id, usuario, historico, texto) VALUES" + "(?,?,?,?)");
-			psta.setLong(1, comentario.getId());
-			psta.setLong(2, comentario.getUsuario().getId());
-			psta.setLong(3, comentario.getHistoria().getId());
-			psta.setString(4, comentario.getTexto());
+					"INSERT INTO Comentario" + "(usuario, historico, texto) VALUES" + "(?,?,?)");
+			psta.setLong(1, comentario.getUsuario().getId());
+			psta.setLong(2, comentario.getHistoria().getId());
+			psta.setString(3, comentario.getTexto());
 
 			psta.executeUpdate();
 
