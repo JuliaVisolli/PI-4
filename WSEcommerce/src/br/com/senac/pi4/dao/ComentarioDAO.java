@@ -51,7 +51,7 @@ public class ComentarioDAO {
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement(
-					"select distinct c.id, c.usuario, c.historico, c.texto, c.data from Comentario c INNER JOIN Historia h on c.historico = h.id where c.historico = ? order by c.data ASC");
+					"select distinct c.id, c.usuario, c.historico, c.texto, c.data, u.nome from Comentario c INNER JOIN Historia h on c.historico = h.id inner join usuario u on u.id = c.usuario where c.historico = ? order by c.data ASC;");
 
 			psta.setInt(1, pID);
 
@@ -60,7 +60,7 @@ public class ComentarioDAO {
 			while (rs.next()) {
 				ComentarioDTO pg = new ComentarioDTO();
 				pg.setId(rs.getLong("id"));
-				pg.setUsuario(new UsuarioDTO(rs.getLong("usuario")));
+				pg.setUsuario(new UsuarioDTO(rs.getLong("usuario"), rs.getString("nome")));
 				pg.setHistoria(new HistoriaDTO(rs.getLong("historico")));
 				pg.setTexto(rs.getString("texto"));
 				pg.setData(rs.getDate("data"));
