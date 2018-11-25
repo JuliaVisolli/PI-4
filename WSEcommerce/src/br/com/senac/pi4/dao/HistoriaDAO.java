@@ -53,7 +53,7 @@ public class HistoriaDAO {
 //					" from Historia h left JOIN comentario c " + 
 //					" on h.id = c.historico left join Curtida cur on h.id = cur.historico Inner Join Usuario u on u.id = h.usuario GROUP BY c.historico, cur.historico, h.id, h.data, h.texto, h.foto, u.foto, u.nome ORDER BY h.data DESC;");
 			psta = conn.prepareStatement("select  u.foto as usuario_foto, u.nome as usuario_nome, h.id as id_historia, h.data as data_postagem, " + 
-					"					 h.texto as texto_postagem, h.foto as foto_postagem, count(distinct c.usuario) as total_comentarios, count( distinct cur.usuario) as total_curtidas " + 
+					"					 h.texto as texto_postagem, h.foto as foto_postagem, count( c.usuario) as total_comentarios, count( distinct cur.usuario) as total_curtidas " + 
 					"					 from Historia h left JOIN comentario c " + 
 					"					 on h.id = c.historico left join Curtida cur on h.id = cur.historico Inner Join Usuario u on u.id = h.usuario " + 
 					"					 where u.id in (SELECT usuario1 FROM Amizade a WHERE a.usuario2 = ? and a.aprovada = 1) OR " + 
