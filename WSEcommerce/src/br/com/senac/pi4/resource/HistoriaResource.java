@@ -1,5 +1,6 @@
 package br.com.senac.pi4.resource;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +71,45 @@ public class HistoriaResource {
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+	}
+	
+	@GET
+	@Path("/image/{param}")
+	@Produces("image/jpg")
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = UsuarioDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Retorna uma imagem relacionada a um usuario",
+	           response = UsuarioDTO.class)
+	public Response selectImage(@PathParam("param") String historiaId) {
+
+
+		byte[] image = null;
+
+		try {
+
+			image = historiaServiceImpl.selectImage(historiaId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			return Response.status(500).entity(e.getMessage()).header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+					.header("Access-Control-Allow-Credentials", "true")
+					.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
+		}
+		if(image == null){
+			return Response.status(400).entity("Imagem nula").header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+					.header("Access-Control-Allow-Credentials", "true")
+					.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+		}
+		return Response.status(200).entity(new ByteArrayInputStream(image)).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
 	}
 
 }

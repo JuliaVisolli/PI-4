@@ -17,6 +17,9 @@ public class HistoriaServiceImpl {
 		return historiaDAO.selectAllHistoria(usuarioId);
 	}
 	
+	public byte[] selectImage(String historiaId) throws Exception {
+		return historiaDAO.selectImage(historiaId);
+	}
 	
 
 }

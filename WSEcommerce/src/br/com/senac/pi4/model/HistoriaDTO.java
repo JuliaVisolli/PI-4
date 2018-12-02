@@ -25,10 +25,11 @@ public class HistoriaDTO {
 		this.id = id;
 	}
 
-	public HistoriaDTO(Long id, String texto, Date data, int totalComentarios, int totalCurtidas) {
+	public HistoriaDTO(Long id, String texto, byte[] foto, Date data, int totalComentarios, int totalCurtidas) {
 		this();
 		this.id = id;
 		this.texto = texto;
+		this.foto = foto;
 		this.data = data;
 		this.totalComentarios = totalComentarios;
 		this.totalCurtidas = totalCurtidas;

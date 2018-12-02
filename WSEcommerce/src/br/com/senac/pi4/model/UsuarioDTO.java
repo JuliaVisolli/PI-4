@@ -35,10 +35,10 @@ public class UsuarioDTO {
     	this.nome = nome;
     }
     
-	public UsuarioDTO(String nome, byte[] foto) {
+	public UsuarioDTO(String nome, Long id) {
 		this();
 		this.nome = nome;
-		this.foto = foto;
+		this.id = id;
 	}
 	
 	public UsuarioDTO(Long id) {

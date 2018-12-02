@@ -79,7 +79,6 @@ public class UsuarioDAO {
 				pg.setSenha(rs.getString("senha"));
 				pg.setId(rs.getLong("id"));
 				pg.setEmail(rs.getString("email"));
-				pg.setFoto(rs.getBytes("foto"));
 
 			}
 		} catch (SQLException e) {
@@ -113,7 +112,6 @@ public class UsuarioDAO {
 				pg.setSenha(rs.getString("senha"));
 				pg.setId(rs.getLong("id"));
 				pg.setEmail(rs.getString("email"));
-				pg.setFoto(rs.getBytes("foto"));
 
 				listPg.add(pg);
 			}
@@ -209,7 +207,6 @@ public class UsuarioDAO {
 				pg.setNome(rs.getString("nome"));
 				pg.setId(rs.getLong("id"));
 				pg.setEmail(rs.getString("email"));
-				pg.setFoto(rs.getBytes("foto"));
 
 				listUsers.add(pg);
 			}
@@ -238,10 +235,10 @@ public class UsuarioDAO {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement("select h.id as id_historia, h.data as data_postagem, "
 					+ "h.texto as texto_postagem, h.foto as foto_postagem, count(distinct c.usuario) as total_comentarios, "
-					+ "count( distinct cur.usuario) as total_curtidas, u.id as id_usuario, u.nome as nome_usuario, u.foto as foto_usuario "
+					+ "count( distinct cur.usuario) as total_curtidas, u.id as id_usuario, u.nome as nome_usuario "
 					+ "from Usuario u left join Historia h on h.usuario = u.id left JOIN comentario c "
 					+ "on h.id = c.historico left join Curtida cur on h.id = cur.historico where h.usuario = ? "
-					+ "GROUP BY u.id, u.nome, u.foto, c.historico, cur.historico, h.id, h.data, h.texto, h.foto ORDER BY h.data DESC;");
+					+ "GROUP BY u.id, u.nome, c.historico, cur.historico, h.id, h.data, h.texto, h.foto ORDER BY h.data DESC;");
 
 			psta.setInt(1, pID);
 
@@ -251,8 +248,7 @@ public class UsuarioDAO {
 				UsuarioDTO pg = new UsuarioDTO();
 				pg.setId(rs.getLong("id_usuario"));
 				pg.setNome(rs.getString("nome_usuario"));
-				pg.setFoto(rs.getBytes("foto_usuario"));
-				pg.setHistoria(new HistoriaDTO(rs.getLong("id_historia"), rs.getString("texto_postagem"),
+				pg.setHistoria(new HistoriaDTO(rs.getLong("id_historia"), rs.getString("texto_postagem"), rs.getBytes("foto_postagem"),
 						rs.getDate("data_postagem"), rs.getInt("total_comentarios"), rs.getInt("total_curtidas")));
 
 				listPg.add(pg);
