@@ -248,7 +248,7 @@ public class UsuarioDAO {
 				UsuarioDTO pg = new UsuarioDTO();
 				pg.setId(rs.getLong("id_usuario"));
 				pg.setNome(rs.getString("nome_usuario"));
-				pg.setHistoria(new HistoriaDTO(rs.getLong("id_historia"), rs.getString("texto_postagem"), rs.getBytes("foto_postagem"),
+				pg.setHistoria(new HistoriaDTO(rs.getLong("id_historia"), rs.getString("texto_postagem"), rs.getString("foto_postagem"),
 						rs.getDate("data_postagem"), rs.getInt("total_comentarios"), rs.getInt("total_curtidas")));
 
 				listPg.add(pg);

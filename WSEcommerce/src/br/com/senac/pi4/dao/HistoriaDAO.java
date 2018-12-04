@@ -23,7 +23,7 @@ public class HistoriaDAO {
 
 			psta.setLong(1, historia.getUsuario().getId());
 			psta.setString(2, historia.getTexto());
-			psta.setBytes(3, historia.getFoto());
+			psta.setString(3, historia.getFoto());
 			
 			psta.executeUpdate();
 
@@ -68,7 +68,7 @@ public class HistoriaDAO {
 				HistoriaDTO pg = new HistoriaDTO();
 				pg.setId(rs.getLong("id_historia"));
 				pg.setUsuario(new UsuarioDTO(rs.getString("usuario_nome"), rs.getLong("usuario_id")));
-				pg.setFoto(rs.getBytes("foto_postagem"));
+				pg.setFoto(rs.getString("foto_postagem"));
 				pg.setData(rs.getDate("data_postagem"));
 				pg.setTexto(rs.getString("texto_postagem"));
 				pg.setTotalComentarios(rs.getInt("total_comentarios"));
