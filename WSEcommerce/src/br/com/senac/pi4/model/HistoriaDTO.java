@@ -11,7 +11,7 @@ public class HistoriaDTO {
 	private Long id;
 	private UsuarioDTO usuario;
 	private String texto;
-	private byte[] foto;
+	private String foto;
 	private Date data;
 	private Integer totalComentarios;
 	private Integer totalCurtidas;
@@ -25,7 +25,7 @@ public class HistoriaDTO {
 		this.id = id;
 	}
 
-	public HistoriaDTO(Long id, String texto, byte[] foto, Date data, int totalComentarios, int totalCurtidas) {
+	public HistoriaDTO(Long id, String texto, String foto, Date data, int totalComentarios, int totalCurtidas) {
 		this();
 		this.id = id;
 		this.texto = texto;
@@ -63,11 +63,11 @@ public class HistoriaDTO {
 	}
 
 	@ApiModelProperty(value = "foto da historia", required = false)
-	public byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
