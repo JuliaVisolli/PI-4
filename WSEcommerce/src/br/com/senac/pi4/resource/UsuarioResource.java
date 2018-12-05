@@ -216,11 +216,47 @@ public class UsuarioResource {
 	}
 	
 	@GET
-	@Path("/ola")
+	@Path("/count/amigo/{param}")
 	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCountAllAmigosByUserID(@PathParam("param") String idUsuario) {
+
+		Integer totalAmigos = null;
+
+		try {
+			totalAmigos = usuarioServiceImpl.getCountAllAmigosByUserID(idUsuario);
+		} catch (Exception e) {
+			return Response.status(500).entity(e.getMessage()).build();
+		}
+		if (totalAmigos == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(totalAmigos).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
+	}
 	
-	public String ola() {
-		return "Ola";
+	@GET
+	@Path("/count/foto/{param}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCountAllFotoByUserID(@PathParam("param") String idUsuario) {
+
+		Integer totalFotos = null;
+
+		try {
+			totalFotos = usuarioServiceImpl.getCountAllFotoByUserID(idUsuario);
+		} catch (Exception e) {
+			return Response.status(500).entity(e.getMessage()).build();
+		}
+		if (totalFotos == null)
+			return Response.status(404).entity(null).build();
+
+		return Response.status(200).entity(totalFotos).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+
 	}
 	
 }

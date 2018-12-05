@@ -36,6 +36,14 @@ public class UsuarioServiceImpl {
 	public List<UsuarioDTO> perfilUsuario(String idUsuario) throws Exception {
 		return usuarioDAO.perfilUsuario(idUsuario);
 	}
-
+	
+	public Integer getCountAllAmigosByUserID(String idUsuario) throws Exception {
+		return usuarioDAO.getCountAllAmigosByUserID(idUsuario);
+	}
+	
+	public Integer getCountAllFotoByUserID(String idUsuario) throws Exception {
+		return usuarioDAO.getCountAllFotoByUserID(idUsuario);
+	}
+	
 
 }

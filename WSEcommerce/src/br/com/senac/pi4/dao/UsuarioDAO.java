@@ -265,4 +265,78 @@ public class UsuarioDAO {
 		}
 		return listPg;
 	}
+	
+	public Integer getCountAllAmigosByUserID(String idUsuario) throws Exception {
+		Connection conn = null;
+		PreparedStatement psta = null;
+
+		Integer pID = null;
+		Integer total = 0;
+		pID = Integer.parseInt(idUsuario);
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement("select COUNT(u.id) as total from Usuario as u where u.id in (SELECT usuario1 FROM Amizade a WHERE a.usuario2 = ? and a.aprovada = 1) OR " + 
+					"										u.id in (SELECT usuario2 FROM Amizade a WHERE a.usuario1 = ? and a.aprovada = 1)");
+
+			psta.setInt(1, pID);
+			psta.setInt(2, pID);
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+
+				total = rs.getInt("total");
+
+			}
+
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+
+		return total;
+	}
+	
+	public Integer getCountAllFotoByUserID(String idUsuario) throws Exception {
+		Connection conn = null;
+		PreparedStatement psta = null;
+
+		Integer pID = null;
+		Integer total = 0;
+		pID = Integer.parseInt(idUsuario);
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement("select COUNT(h.foto) as total from Historia as h where usuario = ?;");
+
+			psta.setInt(1, pID);
+
+			ResultSet rs = psta.executeQuery();
+
+			while (rs.next()) {
+
+				total = rs.getInt("total");
+
+			}
+
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+
+		return total;
+	}
+
+
 }
