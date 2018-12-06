@@ -41,7 +41,7 @@ public class UsuarioDAO {
 			psta.setString(1, usuario.getNome());
 			psta.setString(2, usuario.getSenha());
 			psta.setString(3, usuario.getEmail());
-			psta.setBytes(4, usuario.getFoto());
+			psta.setString(4, usuario.getFoto());
 
 			psta.executeUpdate();
 

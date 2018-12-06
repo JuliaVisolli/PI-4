@@ -7,11 +7,19 @@ public class AmizadeServiceImpl {
 
 	AmizadeDAO amizadeDAO = new AmizadeDAO();
 
-	public AmizadeDTO solicitaAmizade(AmizadeDTO amizade) throws Exception {
-		return amizadeDAO.solicitaAmizade(amizade);
+	public void solicitarAmizade(long idUsuarioAtual, long idUsuarioSolicitado) throws Exception {
+		 amizadeDAO.solicitarAmizade(idUsuarioAtual, idUsuarioSolicitado);
 	}
 	
-	public void deleteAmizade(Long idUsuario1, Long idUsuario2, Boolean aprovada) throws Exception {
-		amizadeDAO.deleteAmizade(idUsuario1, idUsuario2, aprovada);
+	public void aceitarAmizade(long idUsuarioAtual, long idUsuarioSolicitou) throws Exception {
+		amizadeDAO.aceitarAmizade(idUsuarioAtual, idUsuarioSolicitou);
+	}
+	
+	public AmizadeDTO findAmizade(long idUsuarioAtual, long idUsuarioProcurado) throws Exception {
+		return amizadeDAO.findAmizade(idUsuarioAtual, idUsuarioProcurado);
+	}
+	
+	public void recusarAmizade(long idUsuarioAtual, long idUsuarioSolicitou) throws Exception {
+		amizadeDAO.recusarAmizade(idUsuarioAtual, idUsuarioSolicitou);
 	}
 }
