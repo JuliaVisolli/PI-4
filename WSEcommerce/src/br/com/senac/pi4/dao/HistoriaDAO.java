@@ -1,5 +1,6 @@
 package br.com.senac.pi4.dao;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +24,13 @@ public class HistoriaDAO {
 
 			psta.setLong(1, historia.getUsuario().getId());
 			psta.setString(2, historia.getTexto());
-			psta.setString(3, historia.getFoto());
-			
+			if(historia.getFoto() != null) {
+				byte[] varBinary = historia.getFoto().getBytes(StandardCharsets.UTF_8);
+				psta.setBytes(3, varBinary);
+				
+			}
+			psta.setBytes(3, null);
+
 			psta.executeUpdate();
 
 		} catch (SQLException e) {

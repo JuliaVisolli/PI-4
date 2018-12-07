@@ -1,5 +1,6 @@
 package br.com.senac.pi4.dao;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,9 @@ public class UsuarioDAO {
 			psta.setString(1, usuario.getNome());
 			psta.setString(2, usuario.getSenha());
 			psta.setString(3, usuario.getEmail());
-			psta.setString(4, usuario.getFoto());
+			
+			byte[] varBinary = usuario.getFoto().getBytes(StandardCharsets.UTF_8);
+			psta.setBytes(4, varBinary);
 
 			psta.executeUpdate();
 
