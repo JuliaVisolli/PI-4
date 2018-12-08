@@ -9,15 +9,15 @@ import io.swagger.annotations.ApiModelProperty;
 )
 public class AmizadeDTO {
 	
-	private long usuario1;
-	private long usuario2;
-	private boolean aprovada = false;
+	private UsuarioDTO usuario1;
+	private UsuarioDTO usuario2;
+	private boolean aprovada;
 	
 	public AmizadeDTO() {
 		super();
 	}
 	
-	public AmizadeDTO(long usuario1, long usuario2, boolean aprovada) {
+	public AmizadeDTO(UsuarioDTO usuario1, UsuarioDTO usuario2, boolean aprovada) {
 		this();
 		this.usuario1 = usuario1;
 		this.usuario2 = usuario2;
@@ -25,24 +25,24 @@ public class AmizadeDTO {
 	}
 	
 	@ApiModelProperty(value = "usuario que solicita a amizade", required = true)
-	public long getUsuario1() {
+	public UsuarioDTO getUsuario1() {
 		return usuario1;
 	}
 
-	public void setUsuario1(long usuario1) {
+	public void setUsuario1(UsuarioDTO usuario1) {
 		this.usuario1 = usuario1;
 	}
 	
 	@ApiModelProperty(value = "usuario que foi solicitado a amizade", required = true)
-	public long getUsuario2() {
+	public UsuarioDTO getUsuario2() {
 		return usuario2;
 	}
 
-	public void setUsuario2(long usuario2) {
+	public void setUsuario2(UsuarioDTO usuario2) {
 		this.usuario2 = usuario2;
 	}
 	
-	@ApiModelProperty(value = "status da solicitaco de amizade", required = true)
+	@ApiModelProperty(value = "aprovada", required = true)
 	public boolean isAprovada() {
 		return aprovada;
 	}

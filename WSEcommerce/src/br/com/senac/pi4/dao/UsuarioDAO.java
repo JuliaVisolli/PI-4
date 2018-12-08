@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,8 +44,9 @@ public class UsuarioDAO {
 			psta.setString(2, usuario.getSenha());
 			psta.setString(3, usuario.getEmail());
 			
-			byte[] varBinary = usuario.getFoto().getBytes(StandardCharsets.UTF_8);
-			psta.setBytes(4, varBinary);
+			String base64 = usuario.getFoto();
+			byte[] fotoEmByte = Base64.getDecoder().decode(base64);
+			psta.setBytes(4, fotoEmByte);
 
 			psta.executeUpdate();
 

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import br.com.senac.pi4.model.HistoriaDTO;
@@ -24,12 +25,14 @@ public class HistoriaDAO {
 
 			psta.setLong(1, historia.getUsuario().getId());
 			psta.setString(2, historia.getTexto());
-			if(historia.getFoto() != null) {
-				byte[] varBinary = historia.getFoto().getBytes(StandardCharsets.UTF_8);
-				psta.setBytes(3, varBinary);
+//			if(historia.getFoto() != null) {
+			String base64 = historia.getFoto();
+			byte[] fotoEmByte = Base64.getDecoder().decode(base64);
+	
+				psta.setBytes(3, fotoEmByte);
 				
-			}
-			psta.setBytes(3, null);
+//			}
+//			psta.setBytes(3, null);
 
 			psta.executeUpdate();
 

@@ -26,88 +26,88 @@ public class AmizadeResource {
 	@GET
 	@Path("/solicitaAmizade/{idUsuario1}/{idUsuario2}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response solicitarAmizade(@PathParam("idUsuario1")long idUsuarioAtual,@PathParam("idUsuario2") long idUsuarioSolicitado) throws Exception {
+	public Response solicitarAmizade(AmizadeDTO amizade) throws Exception {
 		try {
-			amizadeServicImpl.solicitarAmizade(idUsuarioAtual, idUsuarioSolicitado);
+			amizadeServicImpl.solicitaAmizade(amizade);
 		} catch (Exception e) {
 			return Response.status(500).entity(e.getMessage()).build();
 		}
-		if (idUsuarioAtual < 1)
+		if (amizade == null)
 			return Response.status(404).entity("Solicitacao nao foi aceita").build();
 
-		return Response.status(200).entity(idUsuarioAtual).header("Access-Control-Allow-Origin", "*")
+		return Response.status(200).entity(amizade).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 
-	@DELETE
-	@Path("/{idUsuario1}/{idUsuario2}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiResponses(value = {
-	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
-	        
-	   })
-	   @ApiOperation(value = "Remove uma amizade",
-	           response = AmizadeDTO.class)
-	public Response recusarAmizade(@PathParam("idUsuario1") long idUsuario1, @PathParam("idUsuario2") long idUsuario2) {
-
-		try {
-			amizadeServicImpl.recusarAmizade(idUsuario1,idUsuario2);
-		} catch (Exception e) {
-			return Response.status(500).entity(e.getMessage()).build();
-		}
-		if (idUsuario1 < 1)
-			return Response.status(404).entity("Removido com sucesso").build();
-
-		return Response.status(200).build();
-
-	}
-	
-	@PUT
-	@Path("/{idUsuario1}/{idUsuario2}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Service executed without errors", response = AmizadeDTO.class)
-
-	})
-	@ApiOperation(value = "Associa um usuario a outro usuario gerando o vinculo de amizade", response = AmizadeDTO.class)
-	public Response aceitarAmizade(@PathParam("idUsuario1")long idUsuarioAtual, @PathParam("idUsuario2")long idUsuarioSolicitou) throws Exception {
-		try {
-			amizadeServicImpl.aceitarAmizade(idUsuarioAtual, idUsuarioSolicitou);
-		} catch (Exception e) {
-			return Response.status(500).entity(e.getMessage()).build();
-		}
-		if (idUsuarioAtual < 1)
-			return Response.status(404).entity("Amizade nao foi aceita").build();
-
-		return Response.status(200).header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Credentials", "true")
-				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
-	}
-	
-	@GET
-	@Path("/{idUsuario1}/{idUsuario2}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Service executed without errors", response = AmizadeDTO.class)
-
-	})
-	@ApiOperation(value = "Procura amizade", response = AmizadeDTO.class)
-	public Response findAmizade(@PathParam("idUsuario1")long idUsuarioAtual, @PathParam("idUsuario2")long idUsuarioProcurado) throws Exception {
-		AmizadeDTO amizadeDTO = null;
-		try {
-			amizadeDTO = amizadeServicImpl.findAmizade(idUsuarioAtual, idUsuarioProcurado);
-		} catch (Exception e) {
-			return Response.status(500).entity(e.getMessage()).build();
-		}
-		if (amizadeDTO == null)
-			return Response.status(404).entity(amizadeDTO).build();
-
-		return Response.status(200).entity(amizadeDTO).header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Credentials", "true")
-				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
-	}
+//	@DELETE
+//	@Path("/{idUsuario1}/{idUsuario2}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@ApiResponses(value = {
+//	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
+//	        
+//	   })
+//	   @ApiOperation(value = "Remove uma amizade",
+//	           response = AmizadeDTO.class)
+//	public Response recusarAmizade(@PathParam("idUsuario1") long idUsuario1, @PathParam("idUsuario2") long idUsuario2) {
+//
+//		try {
+//			amizadeServicImpl.recusarAmizade(idUsuario1,idUsuario2);
+//		} catch (Exception e) {
+//			return Response.status(500).entity(e.getMessage()).build();
+//		}
+//		if (idUsuario1 < 1)
+//			return Response.status(404).entity("Removido com sucesso").build();
+//
+//		return Response.status(200).build();
+//
+//	}
+//	
+//	@PUT
+//	@Path("/{idUsuario1}/{idUsuario2}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@ApiResponses(value = {
+//			@ApiResponse(code = 200, message = "Service executed without errors", response = AmizadeDTO.class)
+//
+//	})
+//	@ApiOperation(value = "Associa um usuario a outro usuario gerando o vinculo de amizade", response = AmizadeDTO.class)
+//	public Response aceitarAmizade(@PathParam("idUsuario1")long idUsuarioAtual, @PathParam("idUsuario2")long idUsuarioSolicitou) throws Exception {
+//		try {
+//			amizadeServicImpl.aceitarAmizade(idUsuarioAtual, idUsuarioSolicitou);
+//		} catch (Exception e) {
+//			return Response.status(500).entity(e.getMessage()).build();
+//		}
+//		if (idUsuarioAtual < 1)
+//			return Response.status(404).entity("Amizade nao foi aceita").build();
+//
+//		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+//				.header("Access-Control-Allow-Credentials", "true")
+//				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+//	}
+//	
+//	@GET
+//	@Path("/{idUsuario1}/{idUsuario2}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@ApiResponses(value = {
+//			@ApiResponse(code = 200, message = "Service executed without errors", response = AmizadeDTO.class)
+//
+//	})
+//	@ApiOperation(value = "Procura amizade", response = AmizadeDTO.class)
+//	public Response findAmizade(@PathParam("idUsuario1")long idUsuarioAtual, @PathParam("idUsuario2")long idUsuarioProcurado) throws Exception {
+//		AmizadeDTO amizadeDTO = null;
+//		try {
+//			amizadeDTO = amizadeServicImpl.findAmizade(idUsuarioAtual, idUsuarioProcurado);
+//		} catch (Exception e) {
+//			return Response.status(500).entity(e.getMessage()).build();
+//		}
+//		if (amizadeDTO == null)
+//			return Response.status(404).entity(amizadeDTO).build();
+//
+//		return Response.status(200).entity(amizadeDTO).header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+//				.header("Access-Control-Allow-Credentials", "true")
+//				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+//	}
 }
