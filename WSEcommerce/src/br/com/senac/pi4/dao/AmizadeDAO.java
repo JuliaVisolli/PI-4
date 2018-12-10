@@ -46,16 +46,16 @@ public class AmizadeDAO {
 		return null;
 	}
 	
-	public void deleteAmizade(Long idUsuario1, Long idUsuario2) throws Exception {
-		String sql = "DELETE FROM Amizade WHERE usuario1 = ? usuario2 = ? and aprovada = 1";
+	public void deleteAmizade(Long usuario1, Long usuario2) throws Exception {
+		String sql = "DELETE FROM Amizade WHERE usuario1 = ? and usuario2 = ? and aprovada = 1";
 		Connection conn = null;
 		PreparedStatement psta = null;
 		try {
 			conn = Database.get().conn();
 			psta = conn.prepareStatement(sql);
 			
-			psta.setLong(1, idUsuario1);
-			psta.setLong(2, idUsuario2);
+			psta.setLong(1, usuario1);
+			psta.setLong(2, usuario2);
 			
 			psta.executeUpdate();
 		} catch (SQLException e) {

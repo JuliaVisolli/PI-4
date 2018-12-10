@@ -11,8 +11,8 @@ public class AmizadeServiceImpl {
 		 amizadeDAO.solicitaAmizade(amizade);
 	}
 	
-	public void deleteAmizade(Long idUsuario1, Long idUsuario2) throws Exception {
-		amizadeDAO.deleteAmizade(idUsuario1, idUsuario2);
+	public void deleteAmizade(Long usuario1, Long usuario2) throws Exception {
+		amizadeDAO.deleteAmizade(usuario1, usuario2);
 	}
 //	public void aceitarAmizade(UsuarioDTO  idUsuarioAtual, UsuarioDTO  idUsuarioSolicitou) throws Exception {
 //		amizadeDAO.aceitarAmizade(idUsuarioAtual, idUsuarioSolicitou);

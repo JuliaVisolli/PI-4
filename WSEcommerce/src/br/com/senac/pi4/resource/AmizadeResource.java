@@ -41,7 +41,7 @@ public class AmizadeResource {
 	}
 
 	@DELETE
-	@Path("/{idUsuario1}/{idUsuario2}")
+	@Path("/{usuario1}/{usuario2}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiResponses(value = {
 	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
@@ -49,14 +49,14 @@ public class AmizadeResource {
 	   })
 	   @ApiOperation(value = "Remove uma amizade",
 	           response = AmizadeDTO.class)
-	public Response recusarAmizade(@PathParam("idUsuario1") Long idUsuario1, @PathParam("idUsuario2") Long idUsuario2) {
+	public Response recusarAmizade(@PathParam("usuario1") Long usuario1, @PathParam("usuario2") Long usuario2) {
 
 		try {
-			amizadeServicImpl.deleteAmizade(idUsuario1,idUsuario2);
+			amizadeServicImpl.deleteAmizade(usuario1, usuario2);
 		} catch (Exception e) {
 			return Response.status(500).entity(e.getMessage()).build();
 		}
-		if (idUsuario1 < 1)
+		if (usuario1 < 1)
 			return Response.status(404).entity("Removido com sucesso").build();
 
 		return Response.status(200).build();
