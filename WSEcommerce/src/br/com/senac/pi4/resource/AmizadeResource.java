@@ -23,8 +23,7 @@ public class AmizadeResource {
 
 	AmizadeServiceImpl amizadeServicImpl = new AmizadeServiceImpl();
 
-	@GET
-	@Path("/solicitaAmizade/{idUsuario1}/{idUsuario2}")
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response solicitarAmizade(AmizadeDTO amizade) throws Exception {
 		try {
@@ -41,28 +40,28 @@ public class AmizadeResource {
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
 	}
 
-//	@DELETE
-//	@Path("/{idUsuario1}/{idUsuario2}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@ApiResponses(value = {
-//	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
-//	        
-//	   })
-//	   @ApiOperation(value = "Remove uma amizade",
-//	           response = AmizadeDTO.class)
-//	public Response recusarAmizade(@PathParam("idUsuario1") long idUsuario1, @PathParam("idUsuario2") long idUsuario2) {
-//
-//		try {
-//			amizadeServicImpl.recusarAmizade(idUsuario1,idUsuario2);
-//		} catch (Exception e) {
-//			return Response.status(500).entity(e.getMessage()).build();
-//		}
-//		if (idUsuario1 < 1)
-//			return Response.status(404).entity("Removido com sucesso").build();
-//
-//		return Response.status(200).build();
-//
-//	}
+	@DELETE
+	@Path("/{idUsuario1}/{idUsuario2}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiResponses(value = {
+	           @ApiResponse(code = 200, message =  "Service executed without errors", response = AmizadeDTO.class)
+	        
+	   })
+	   @ApiOperation(value = "Remove uma amizade",
+	           response = AmizadeDTO.class)
+	public Response recusarAmizade(@PathParam("idUsuario1") Long idUsuario1, @PathParam("idUsuario2") Long idUsuario2) {
+
+		try {
+			amizadeServicImpl.deleteAmizade(idUsuario1,idUsuario2);
+		} catch (Exception e) {
+			return Response.status(500).entity(e.getMessage()).build();
+		}
+		if (idUsuario1 < 1)
+			return Response.status(404).entity("Removido com sucesso").build();
+
+		return Response.status(200).build();
+
+	}
 //	
 //	@PUT
 //	@Path("/{idUsuario1}/{idUsuario2}")

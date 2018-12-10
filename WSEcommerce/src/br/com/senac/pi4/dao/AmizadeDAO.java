@@ -46,6 +46,30 @@ public class AmizadeDAO {
 		return null;
 	}
 	
+	public void deleteAmizade(Long idUsuario1, Long idUsuario2) throws Exception {
+		String sql = "DELETE FROM Amizade WHERE usuario1 = ? usuario2 = ? and aprovada = 1";
+		Connection conn = null;
+		PreparedStatement psta = null;
+		try {
+			conn = Database.get().conn();
+			psta = conn.prepareStatement(sql);
+			
+			psta.setLong(1, idUsuario1);
+			psta.setLong(2, idUsuario2);
+			
+			psta.executeUpdate();
+		} catch (SQLException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (psta != null)
+				psta.close();
+			if (conn != null)
+				conn.close();
+		}
+	}
+	
 //	public void solicitarAmizade(long idUsuarioAtual, long idUsuarioSolicitado) throws JaSaoAmigosException, AmizadeJaSolicitadaException, DaoException, Exception {
 //        
 //	       

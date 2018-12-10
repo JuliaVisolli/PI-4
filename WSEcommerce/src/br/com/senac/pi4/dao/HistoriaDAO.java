@@ -25,12 +25,15 @@ public class HistoriaDAO {
 
 			psta.setLong(1, historia.getUsuario().getId());
 			psta.setString(2, historia.getTexto());
-//			if(historia.getFoto() != null) {
-			String base64 = historia.getFoto();
-			byte[] fotoEmByte = Base64.getDecoder().decode(base64);
-	
-				psta.setBytes(3, fotoEmByte);
-				
+			if(historia.getFoto() != null) {
+				String base64 = historia.getFoto();
+				byte[] fotoEmByte = Base64.getDecoder().decode(base64);
+		
+					psta.setBytes(3, fotoEmByte);
+			} else {
+				psta.setBytes(3,  null);
+			}
+						
 //			}
 //			psta.setBytes(3, null);
 
