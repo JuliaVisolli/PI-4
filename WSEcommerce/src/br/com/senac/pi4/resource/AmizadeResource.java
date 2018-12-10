@@ -59,7 +59,7 @@ public class AmizadeResource {
 		if (usuario1 < 1)
 			return Response.status(404).entity("Removido com sucesso").build();
 
-		return Response.status(200).build();
+		return Response.status(200).entity(usuario1).build();
 
 	}
 //	
